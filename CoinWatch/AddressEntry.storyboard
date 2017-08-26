@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="it5-ET-qoh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Address Entry View Controller-->
+        <scene sceneID="j5M-Ic-tIp">
+            <objects>
+                <viewController id="it5-ET-qoh" customClass="AddressEntryViewController" customModule="CoinWatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="43R-OR-4hk"/>
+                        <viewControllerLayoutGuide type="bottom" id="lVc-fQ-aaZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="orX-6i-YDF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jT0-kS-hIr">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <connections>
+                                    <segue destination="rg5-ku-Edb" kind="embed" id="lKo-Ji-cSV"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyp-X4-Fan">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <connections>
+                                    <segue destination="0XY-SC-Saz" kind="embed" id="JcU-A5-cGH"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jT0-kS-hIr" firstAttribute="leading" secondItem="orX-6i-YDF" secondAttribute="leading" id="1wP-XQ-UH8"/>
+                            <constraint firstItem="lVc-fQ-aaZ" firstAttribute="top" secondItem="Kyp-X4-Fan" secondAttribute="bottom" id="5Za-un-YSg"/>
+                            <constraint firstItem="Kyp-X4-Fan" firstAttribute="top" secondItem="43R-OR-4hk" secondAttribute="bottom" id="8qA-pB-Cc8"/>
+                            <constraint firstItem="lVc-fQ-aaZ" firstAttribute="top" secondItem="jT0-kS-hIr" secondAttribute="bottom" id="J9T-7X-MkF"/>
+                            <constraint firstAttribute="trailing" secondItem="jT0-kS-hIr" secondAttribute="trailing" id="Ta2-lK-UFo"/>
+                            <constraint firstAttribute="trailing" secondItem="Kyp-X4-Fan" secondAttribute="trailing" id="c0P-Z4-n9t"/>
+                            <constraint firstItem="jT0-kS-hIr" firstAttribute="top" secondItem="43R-OR-4hk" secondAttribute="bottom" id="c2R-g2-G9v"/>
+                            <constraint firstItem="Kyp-X4-Fan" firstAttribute="leading" secondItem="orX-6i-YDF" secondAttribute="leading" id="vbA-t1-l3A"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="awf-jG-3ab">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="MYh-rl-pmm">
+                            <connections>
+                                <action selector="dismissSelf" destination="it5-ET-qoh" id="W2b-qS-qp2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="manualEntryContainerView" destination="Kyp-X4-Fan" id="gJ5-8z-iGM"/>
+                        <outlet property="scannerContainerView" destination="jT0-kS-hIr" id="HLe-Mg-hid"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OiQ-tl-b0r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46" y="-666"/>
+        </scene>
+        <!--ScanQR View Controller-->
+        <scene sceneID="pCf-Ff-G5J">
+            <objects>
+                <viewController id="rg5-ku-Edb" customClass="ScanQRViewController" customModule="CoinWatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="B5S-70-dwO"/>
+                        <viewControllerLayoutGuide type="bottom" id="6dk-Gg-3EW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5JX-Og-mYg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="previewContainer" destination="5JX-Og-mYg" id="964-C8-Ow2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mew-44-bzf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-260" y="125"/>
+        </scene>
+        <!--SingleFieldEntry-->
+        <scene sceneID="cN1-jV-nPF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SingleFieldEntry" id="0XY-SC-Saz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IVn-b8-2YD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="335" y="-175"/>
+        </scene>
+    </scenes>
+</document>

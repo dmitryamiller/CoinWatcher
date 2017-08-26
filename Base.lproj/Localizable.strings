@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  CoinWatch
+
+  Created by Dmitry Miller on 8/22/17.
+  Copyright © 2017 Dmitry Miller. All rights reserved.
+*/
+
+"Bitcoin" = "Bitcoin";
+"Etherium" = "Etherium";

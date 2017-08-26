@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="A1R-Q8-56W">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="7Qh-cE-sjQ">
+            <objects>
+                <navigationController id="A1R-Q8-56W" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tik-gO-SIe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="4sx-pk-Xt9" kind="relationship" relationship="rootViewController" id="QCV-qq-Dmj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aJD-vy-roD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46" y="-1415"/>
+        </scene>
+        <!--Add Wallet View Controller-->
+        <scene sceneID="LgB-0T-Zgp">
+            <objects>
+                <viewController id="4sx-pk-Xt9" customClass="AddWalletViewController" customModule="CoinWatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <containerView key="view" opaque="NO" contentMode="scaleToFill" id="bWo-Zu-UWz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <connections>
+                            <segue destination="1nX-vD-YqU" kind="embed" id="sKo-UV-BUg"/>
+                        </connections>
+                    </containerView>
+                    <navigationItem key="navigationItem" id="4Ge-96-83g">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rsd-nu-f9N">
+                            <connections>
+                                <action selector="dismissSelf" destination="4sx-pk-Xt9" id="6Ca-9F-jml"/>
+                            </connections>
+                        </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="1pj-5K-iqk">
+                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Scan QR"/>
+                                <segment title="Manual"/>
+                            </segments>
+                            <connections>
+                                <action selector="handleEntryTypeChange:" destination="4sx-pk-Xt9" eventType="valueChanged" id="Zr3-he-H2V"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="59Q-Xo-IOC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46" y="-691"/>
+        </scene>
+        <!--AddressEntry-->
+        <scene sceneID="gzH-DH-fOJ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddressEntry" id="1nX-vD-YqU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LG5-b3-JJO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46" y="-206"/>
+        </scene>
+        <!--Coin Type-->
+        <scene sceneID="JzZ-5X-MLh">
+            <objects>
+                <tableViewController id="5p9-gj-5Eq" userLabel="Coin Type" customClass="CoinTypeViewController" customModule="CoinWatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="uwC-SN-BCQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CoinTypeTableCell" textLabel="nO4-Hc-vhz" rowHeight="50" style="IBUITableViewCellStyleDefault" id="cRy-Qm-L7i" customClass="CoinTypeTableCell" customModule="CoinWatch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cRy-Qm-L7i" id="cbG-ny-ukC">
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="?? Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nO4-Hc-vhz">
+                                            <rect key="frame" x="15" y="0.0" width="325" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="nO4-Hc-vhz" id="NNT-5s-kpy"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5p9-gj-5Eq" id="fr6-pr-lfN"/>
+                            <outlet property="delegate" destination="5p9-gj-5Eq" id="PU1-Ym-sxz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Currency Type" id="Y1d-pU-f6f">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="70N-cD-UB6">
+                            <connections>
+                                <action selector="dismissSelf" destination="5p9-gj-5Eq" id="4UF-la-YAO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xPr-J9-w2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-791" y="-691"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zIF-5Q-dI7">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Single Field Entry View Controller-->
+        <scene sceneID="pvs-AS-NR2">
+            <objects>
+                <tableViewController id="zIF-5Q-dI7" customClass="SingleFieldEntryViewController" customModule="CoinWatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="JNp-XF-m7E">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="11s-91-iMt">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dey-dM-MO0">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dey-dM-MO0" id="fXj-Zr-AQa">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EHX-rq-IG2">
+                                                    <rect key="frame" x="15" y="10" width="345" height="23.5"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="zIF-5Q-dI7" id="Vfj-kt-Yik"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="EHX-rq-IG2" secondAttribute="bottom" constant="10" id="5j7-aE-Buk"/>
+                                                <constraint firstAttribute="trailing" secondItem="EHX-rq-IG2" secondAttribute="trailing" constant="15" id="EnL-h7-ZKC"/>
+                                                <constraint firstItem="EHX-rq-IG2" firstAttribute="leading" secondItem="fXj-Zr-AQa" secondAttribute="leading" constant="15" id="M2P-go-BW0"/>
+                                                <constraint firstItem="EHX-rq-IG2" firstAttribute="top" secondItem="fXj-Zr-AQa" secondAttribute="top" constant="10" id="uRs-6J-sCj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="zIF-5Q-dI7" id="RG1-iv-D65"/>
+                            <outlet property="delegate" destination="zIF-5Q-dI7" id="oOP-oH-vJf"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="textField" destination="EHX-rq-IG2" id="sM7-5h-CyQ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qYw-ul-GJK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-129" y="36"/>
+        </scene>
+    </scenes>
+</document>

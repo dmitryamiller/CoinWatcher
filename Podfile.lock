@@ -1,0 +1,33 @@
+PODS:
+  - HockeySDK/AllFeaturesLib (4.1.6)
+  - PromiseKit (4.3.2):
+    - PromiseKit/Foundation (= 4.3.2)
+    - PromiseKit/QuartzCore (= 4.3.2)
+    - PromiseKit/UIKit (= 4.3.2)
+  - PromiseKit/CorePromise (4.3.2)
+  - PromiseKit/Foundation (4.3.2):
+    - PromiseKit/CorePromise
+  - PromiseKit/QuartzCore (4.3.2):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (4.3.2):
+    - PromiseKit/CorePromise
+  - Realm (2.9.1):
+    - Realm/Headers (= 2.9.1)
+  - Realm/Headers (2.9.1)
+  - RealmSwift (2.9.1):
+    - Realm (= 2.9.1)
+
+DEPENDENCIES:
+  - HockeySDK/AllFeaturesLib
+  - PromiseKit (~> 4.0)
+  - RealmSwift
+
+SPEC CHECKSUMS:
+  HockeySDK: 95db557d54489a570dcdefae0d02f98eecc279a3
+  PromiseKit: 32430ae679605b17c15d6193679cae7bf60147f7
+  Realm: f91fb43bd474c4f731a116ebf7392c75dd015920
+  RealmSwift: 207f12a4a36b696c5183c60a1c06d70234a23e56
+
+PODFILE CHECKSUM: 32c9e343ef5926ffc335d0a00a96fae2ae7c58da
+
+COCOAPODS: 1.2.1.beta.1
