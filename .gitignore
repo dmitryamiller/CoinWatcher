@@ -1,3 +1,5 @@
 CoinWatch.xcworkspace/xcuserdata/goblin77.xcuserdatad/UserInterfaceState.xcuserstate
 CoinWatch.xcworkspace/xcuserdata/goblin77.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
 CoinWatch.xcodeproj/project.xcworkspace/xcuserdata/goblin77.xcuserdatad/UserInterfaceState.xcuserstate
+.DS_Store
+Pods/*
