@@ -42,11 +42,36 @@ class AddressEntryViewController: UIViewController {
             self.manualEntryViewController = singleFieldEntry
             self.manualEntryViewController.promptText = "Address"
             self.manualEntryViewController.placeholderText = "Enter address"
+            self.manualEntryViewController.isEntryValid = { [weak self] entry in
+                guard let entry = entry else { return false }
+                
+                if let coinType = self?.coinType {
+                    return coinType.validate(address: entry)
+                }
+                
+                return entry.characters.count > 0
+            }
             
+            self.manualEntryViewController.didCompleteEntry = { [weak self] entry in
+                guard let entry = entry else { return }
+                self?.didGetAddressWithCoinType?(entry, self?.coinType)
+            }
         }
     }
     
     // MARK: - Misc
+    
+    func restartIfApplicable() {
+        switch self.entryType {
+            case .qr:
+                self.scannerViewController.start()
+                self.manualEntryViewController.textField.resignFirstResponder()
+            case .manual:
+                self.scannerViewController.stop()
+                self.manualEntryViewController.textField.becomeFirstResponder()
+        
+        }
+    }
     private func syncViewsWithEntryType() {
         switch self.entryType {
             case .qr:

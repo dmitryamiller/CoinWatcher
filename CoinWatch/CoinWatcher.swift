@@ -127,7 +127,7 @@ class CoinWatcher: NSObject {
             }
             switch w.coinType {
                 case .bitcoin:
-                    walletPromises.append(self.fetchBitcoinBalance(for: w.address, currency: currency))
+                    walletPromises.append(CoinWatcher.fetchBitcoinBalance(for: w.address, currency: currency))
                 case .etherium:
                     continue
             }
@@ -201,10 +201,40 @@ extension CoinWatcher {
 
 // BitCoin
 extension CoinWatcher {
-    fileprivate func fetchBitcoinBalance(for publicKey: String, currency: Currency) -> Promise <Void> {
+    static func fetchAmount(forBitcoinAddress address: String) -> Promise<Double> {
+        return Promise { fulfill, reject in
+            let urlString = "https://blockchain.info/q/addressbalance/\(address)"
+            
+            guard let url = URL(string: urlString) else { reject(NSError(domain: "url", code: 0, userInfo: nil)); return }
+            let request = URLRequest(url: url)
+            let session = URLSession.shared
+            
+            let dataTask = session.dataTask(with: request) { data, response, error in
+                if let data = data {
+                    guard let stringResponse = String(data: data, encoding: String.Encoding.utf8) else { reject(NSError(domain: "null", code: 0, userInfo: nil)); return  }
+                    
+                    
+                    if let amount = Double(stringResponse) {
+                        fulfill(amount / Double(100000000))
+                    } else {
+                        reject(NSError(domain: "invalidAddress", code: 0, userInfo: nil))
+                    }
+                } else if let error = error {
+                    reject(error)
+                } else {
+                    reject(NSError(domain: "nothing", code: 0, userInfo: nil))
+                }
+            }
+            
+            dataTask.resume()
+                
+        }
+    }
+    
+    static func fetchBitcoinBalance(for publicKey: String, currency: Currency) -> Promise <Void> {
         return Promise { fulfill, reject in
             let urlString = "https://blockchain.info/q/addressbalance/\(publicKey)?confirmations=6"
-            
+                        
             guard let url = URL(string: urlString) else { reject(NSError(domain: "url", code: 0, userInfo: nil)); return }
             let request = URLRequest(url: url)
             let session = URLSession.shared

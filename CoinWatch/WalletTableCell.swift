@@ -12,7 +12,7 @@ class WalletTableCell: UITableViewCell {
     @IBOutlet weak var coinTypeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
-    
+    @IBOutlet weak var nativeAmountLabel: UILabel!
     
     var wallet: Wallet? {
         didSet {
@@ -34,6 +34,14 @@ class WalletTableCell: UITableViewCell {
             self.watch(object: wallet, propertyName: #keyPath(Wallet.ticker.price)) { [weak self] in
                 guard false == (self?.wallet?.isInvalidated ?? true) else { return }
                 self?.amountLabel.text = WalletTableCell.format(nativeBalance: self?.wallet?.nativeBalance,price: self?.wallet?.ticker?.price, currency: userPreferences.currency)
+            }
+            
+            self.watch(object: wallet, propertyName: #keyPath(Wallet.nativeBalance)) { [weak self] in
+                let formatter = NumberFormatter()
+                formatter.positiveFormat = "#,###.0000 \(wallet.coinType.rawValue)"
+                formatter.maximumFractionDigits = 4
+                formatter.minimumFractionDigits = 4
+                self?.nativeAmountLabel.text = formatter.string(from: wallet.nativeBalance as NSNumber)
             }
         }
     }

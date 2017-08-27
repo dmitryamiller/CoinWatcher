@@ -40,15 +40,21 @@ class Wallet: Object {
         return realm.objects(Wallet.self).filter("%K = %@ AND %K = %@", #keyPath(Wallet.address), address, #keyPath(Wallet.coinTypeId), coinType.rawValue).first != nil
     }
     
-    static func create(coinType: CoinType, address: String, name: String) -> Wallet? {
+    static func create(coinType: CoinType, address: String, name: String, nativeBalance: Double = -1) -> Wallet? {
         let realm = try! Realm()
         realm.beginWrite()
         let w = Wallet()
         w.address = address
         w.coinTypeId = coinType.rawValue
         w.name = name
+        w.nativeBalance = nativeBalance
         w.sortIndex = Wallet.sortIndex(forWalletWith: coinType)
+        w.ticker = realm.object(ofType: CoinTicker.self, forPrimaryKey: CoinTicker.uuid(forCoinTypeId: coinType.rawValue, currencyId: UserPreferences.current().currencyType))
         realm.add(w, update: true)
+        
+        
+        
+        
         try! realm.commitWrite()
         
         return realm.object(ofType: Wallet.self, forPrimaryKey: w.uuid)        
