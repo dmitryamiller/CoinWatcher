@@ -86,7 +86,10 @@ class CoinWatcher: NSObject {
         
         self.syncInProgress = true
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
+        
         _ = self.fetchTickers(for: userPreferences.currency).then() { _ in
                 return when(resolved: walletPromises)
             }.always { [weak self] in
@@ -102,7 +105,9 @@ class CoinWatcher: NSObject {
                     unwrappedSelf.scheduleNextSync()
                 }
                 
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
             }
     }
     

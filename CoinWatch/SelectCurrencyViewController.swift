@@ -33,7 +33,7 @@ class SelectCurrencyViewController: UITableViewController {
         
         let currency = self.currencies[indexPath.row]
         cell.accessoryType = currency == self.selectedCurrency ? .checkmark : .none
-        cell.textLabel?.text = "\(currency) (\(currency.symbol.uppercased()))"
+        cell.textLabel?.text = "\(currency.rawValue) (\(currency.symbol))"
         return cell
     }
     
