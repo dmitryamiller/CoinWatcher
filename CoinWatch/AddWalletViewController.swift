@@ -34,8 +34,6 @@ class AddWalletViewController: UIViewController {
                 guard let address = self?.address else { return }
                 self?.validateAndSaveCoin(withType: coinType, address: address)
             }
-            
-            
         }
     }
     
@@ -77,8 +75,7 @@ class AddWalletViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
             return
         }
-        
-        
+
         _ = Wallet.create(coinType: coinType, address: address, name: Wallet.defaultName(for: coinType))
         self.dismissSelf()
         
