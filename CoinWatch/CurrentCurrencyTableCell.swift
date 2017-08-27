@@ -1,5 +1,5 @@
 //
-//  CurrencyTableCell.swift
+//  CurrentCurrencyTableCell.swift
 //  CoinWatch
 //
 //  Created by Dmitry Miller on 8/25/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CurrencyTableCell: UITableViewCell {
+class CurrentCurrencyTableCell: UITableViewCell {
     var userPreferences: UserPreferences? {
         didSet {
             self.unwatchAll()

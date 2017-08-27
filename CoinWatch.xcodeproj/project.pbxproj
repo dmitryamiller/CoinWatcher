@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		30BF15DC8A498778DC66907C /* Pods_CoinWatchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95C1A1C4FF5B5973E2161AD /* Pods_CoinWatchTests.framework */; };
-		3BA895E51F50F20A00E52D76 /* CurrencyTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895E41F50F20A00E52D76 /* CurrencyTableCell.swift */; };
+		3BA895E51F50F20A00E52D76 /* CurrentCurrencyTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895E41F50F20A00E52D76 /* CurrentCurrencyTableCell.swift */; };
 		3BA895EB1F521A5500E52D76 /* AddressEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895EA1F521A5500E52D76 /* AddressEntryViewController.swift */; };
 		3BA895EF1F52222E00E52D76 /* AddressEntry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BA895EE1F52222E00E52D76 /* AddressEntry.storyboard */; };
 		3BA895F51F52238A00E52D76 /* SingleFieldEntry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BA895F41F52238A00E52D76 /* SingleFieldEntry.storyboard */; };
 		3BA895F71F5223A300E52D76 /* SingleFieldEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895F61F5223A300E52D76 /* SingleFieldEntryViewController.swift */; };
 		3BA895F91F5226F700E52D76 /* AddWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895F81F5226F700E52D76 /* AddWalletViewController.swift */; };
+		3BA895FE1F523FDC00E52D76 /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895FD1F523FDC00E52D76 /* SelectCurrencyViewController.swift */; };
 		3BA9B31D1F4D319C00B63364 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B31C1F4D319C00B63364 /* AppDelegate.swift */; };
 		3BA9B31F1F4D319C00B63364 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B31E1F4D319C00B63364 /* ViewController.swift */; };
 		3BA9B3221F4D319C00B63364 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BA9B3201F4D319C00B63364 /* Main.storyboard */; };
@@ -53,12 +54,13 @@
 
 /* Begin PBXFileReference section */
 		1F20E4463BC389657E968D32 /* Pods-CoinWatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinWatchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoinWatchTests/Pods-CoinWatchTests.release.xcconfig"; sourceTree = "<group>"; };
-		3BA895E41F50F20A00E52D76 /* CurrencyTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyTableCell.swift; sourceTree = "<group>"; };
+		3BA895E41F50F20A00E52D76 /* CurrentCurrencyTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentCurrencyTableCell.swift; sourceTree = "<group>"; };
 		3BA895EA1F521A5500E52D76 /* AddressEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressEntryViewController.swift; sourceTree = "<group>"; };
 		3BA895EE1F52222E00E52D76 /* AddressEntry.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddressEntry.storyboard; sourceTree = "<group>"; };
 		3BA895F41F52238A00E52D76 /* SingleFieldEntry.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SingleFieldEntry.storyboard; sourceTree = "<group>"; };
 		3BA895F61F5223A300E52D76 /* SingleFieldEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleFieldEntryViewController.swift; sourceTree = "<group>"; };
 		3BA895F81F5226F700E52D76 /* AddWalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWalletViewController.swift; sourceTree = "<group>"; };
+		3BA895FD1F523FDC00E52D76 /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
 		3BA9B3191F4D319C00B63364 /* CoinWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BA9B31C1F4D319C00B63364 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BA9B31E1F4D319C00B63364 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				3BA9B3471F4D378800B63364 /* Views */,
 				3BA9B3201F4D319C00B63364 /* Main.storyboard */,
 				3BA9B3451F4D376800B63364 /* WalletsViewController.swift */,
+				3BA895FD1F523FDC00E52D76 /* SelectCurrencyViewController.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -237,7 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				3BA9B3671F4E6E9F00B63364 /* WalletTableCell.swift */,
-				3BA895E41F50F20A00E52D76 /* CurrencyTableCell.swift */,
+				3BA895E41F50F20A00E52D76 /* CurrentCurrencyTableCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -507,13 +510,14 @@
 				3BA9B3421F4D341D00B63364 /* UserPreferences.swift in Sources */,
 				3BA9B35B1F4D4AEB00B63364 /* CoinTypeViewController.swift in Sources */,
 				3BA9B3461F4D376800B63364 /* WalletsViewController.swift in Sources */,
+				3BA895FE1F523FDC00E52D76 /* SelectCurrencyViewController.swift in Sources */,
 				3BA9B3621F4E62F200B63364 /* WalletNameViewController.swift in Sources */,
 				3BA9B3711F4F4D2600B63364 /* Currency.swift in Sources */,
 				3BA895F91F5226F700E52D76 /* AddWalletViewController.swift in Sources */,
 				3BA9B3731F4F4D7300B63364 /* CoinType.swift in Sources */,
 				3BA9B3641F4E64F300B63364 /* NSObject+KVO.swift in Sources */,
 				3BA9B3781F4FE23900B63364 /* Invalidator.swift in Sources */,
-				3BA895E51F50F20A00E52D76 /* CurrencyTableCell.swift in Sources */,
+				3BA895E51F50F20A00E52D76 /* CurrentCurrencyTableCell.swift in Sources */,
 				3BA9B3591F4D49CF00B63364 /* CoinTypeTableCell.swift in Sources */,
 				3BA9B3601F4D4FC500B63364 /* ScanQRViewController.swift in Sources */,
 				3BA9B3401F4D332E00B63364 /* Wallet.swift in Sources */,

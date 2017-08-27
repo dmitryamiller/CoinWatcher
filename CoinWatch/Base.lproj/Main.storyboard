@@ -19,8 +19,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CurrencyTableCell" textLabel="QVo-TW-B0v" style="IBUITableViewCellStyleDefault" id="RJk-AL-bFo" customClass="CurrencyTableCell" customModule="CoinWatch" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CurrentCurrencyTableCell" textLabel="QVo-TW-B0v" style="IBUITableViewCellStyleDefault" id="RJk-AL-bFo" customClass="CurrentCurrencyTableCell" customModule="CoinWatch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RJk-AL-bFo" id="Eib-yF-iCe">
                                     <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -35,9 +35,12 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="nbp-KB-GRI" kind="show" id="ZI7-1O-ao0"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ZeroData" textLabel="jka-4u-Asa" style="IBUITableViewCellStyleDefault" id="wQh-1A-bkA">
-                                <rect key="frame" x="0.0" y="100" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wQh-1A-bkA" id="0Pq-Fz-FzB">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -54,10 +57,10 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WalletTableCell" rowHeight="65" id="oIU-QG-Cn3" customClass="WalletTableCell" customModule="CoinWatch" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="144" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="143.5" width="375" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oIU-QG-Cn3" id="qzx-G1-xaY">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="64"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="64.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? Bitcoin Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-n9-bpu">
@@ -113,6 +116,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQn-pl-2Fq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="924" y="137"/>
+        </scene>
+        <!--Select Currency View Controller-->
+        <scene sceneID="FPT-sK-inB">
+            <objects>
+                <tableViewController id="nbp-KB-GRI" customClass="SelectCurrencyViewController" customModule="CoinWatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="K8N-Ys-5UU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrencyCell" textLabel="2mM-Ot-PKL" style="IBUITableViewCellStyleDefault" id="g7h-vG-aJl">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g7h-vG-aJl" id="CiY-io-6ya">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="?? Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2mM-Ot-PKL">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="nbp-KB-GRI" id="UTn-eW-n6g"/>
+                            <outlet property="delegate" destination="nbp-KB-GRI" id="gmu-B7-8a8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="kEj-Bx-3UV"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5HN-9B-fDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1650" y="136"/>
         </scene>
         <!--AddWallet-->
         <scene sceneID="1ge-Wd-9SX">

@@ -30,6 +30,22 @@ class WalletsViewController: UITableViewController {
         self.loadAndObserveWallets()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectCurrencyViewController = segue.destination as? SelectCurrencyViewController {
+            selectCurrencyViewController.selectedCurrency = UserPreferences.current().currency
+            selectCurrencyViewController.didSelectCurrency = { [weak self] currency in
+                let realm  = try! Realm()
+                realm.beginWrite()
+                let userPrefererences = UserPreferences.current()
+                if userPrefererences.currency != currency {
+                    userPrefererences.currencyType = currency.rawValue
+                }
+                try! realm.commitWrite()
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
     // MARK: - TableViewDataSource and TableViewDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -49,7 +65,7 @@ class WalletsViewController: UITableViewController {
         
         switch section {
             case .currency:
-                    let cell = tableView.dequeReusableCell(withType: CurrencyTableCell.self)
+                    let cell = tableView.dequeReusableCell(withType: CurrentCurrencyTableCell.self)
                     cell.userPreferences = UserPreferences.current()
                     return cell
             case .wallets:
@@ -99,6 +115,10 @@ class WalletsViewController: UITableViewController {
             case .wallets:
                 return "Wallets"
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
