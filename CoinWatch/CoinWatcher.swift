@@ -10,7 +10,9 @@ import Foundation
 import RealmSwift
 import PromiseKit
 
-class CoinWatcher {
+class CoinWatcher: NSObject {
+    static let walletUpddateTimeout: TimeInterval = 15
+    
     static let instance = CoinWatcher()
     
     private var lastSync: TimeInterval = 0
@@ -23,18 +25,22 @@ class CoinWatcher {
     
     private var invalidator: Invalidator!
     
-    required init() {
+    required override init() {
+        super.init()
+        
         self.invalidator = Invalidator(interval: 0.5) { [weak self] in
             self?.sync()
         }
-        
         self.loadAndWatchWalletsAndUserPreferences()
     }
     
-    private func invalidateTimeStampsForAllWallets() {
+    private func updateCoinTickersForAllWallets() {
         let realm = try! Realm()
         realm.beginWrite()
+        let currencyType = UserPreferences.current().currencyType
+        
         for wallet in realm.objects(Wallet.self) {
+            wallet.ticker = realm.object(ofType: CoinTicker.self, forPrimaryKey: CoinTicker.uuid(forCoinTypeId: wallet.coinTypeId, currencyId: currencyType))
             wallet.lastUpdatedAt = 0
         }
         try? realm.commitWrite()
@@ -53,13 +59,15 @@ class CoinWatcher {
             }
         }
         
-        self.userPreferencesNotificationToken = realm.objects(UserPreferences.self).addNotificationBlock { [weak self] _ in
+        let userPreferences = UserPreferences.current()
+        self.watch(object: userPreferences, propertyName: #keyPath(UserPreferences.currencyType)) { [weak self] in
+            self?.updateCoinTickersForAllWallets()
             self?.invalidator.invalidate()
         }
     }
     
     private func scheduleNextSync() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 30) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + CoinWatcher.walletUpddateTimeout) { [weak self] in
             self?.invalidator.invalidate()
         }
     }
@@ -109,7 +117,7 @@ class CoinWatcher {
                 continue
             }
             
-            if currentTime - w.lastUpdatedAt < 30 { // 1 min
+            if currentTime - w.lastUpdatedAt < CoinWatcher.walletUpddateTimeout {
                 continue
             }
             switch w.coinType {
@@ -129,7 +137,7 @@ class CoinWatcher {
 extension CoinWatcher {
     fileprivate func fetchTickers(for currency: Currency) -> Promise<Void> {
         return Promise { fulfill, reject in
-            let urlString = "https://api.coinmarketcap.com/v1/ticker/?\(currency.rawValue)"
+            let urlString = "https://api.coinmarketcap.com/v1/ticker/?convert=\(currency.rawValue)"
             
             guard let url = URL(string: urlString) else { reject(NSError(domain: "url", code: 0, userInfo: nil)); return }
             let request = URLRequest(url: url)
