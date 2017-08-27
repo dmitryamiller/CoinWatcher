@@ -13,6 +13,8 @@ class CoinTypeViewController: UITableViewController {
     var coinTypes: [CoinType] = CoinType.all
     var didSelectCointype: ((CoinType)->())?
     
+    var coinType: CoinType?
+    
     // MARK: -
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -21,13 +23,31 @@ class CoinTypeViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeReusableCell(withType: CoinTypeTableCell.self)
-        cell.coinType = self.coinTypes[indexPath.row]
+        let coinType = self.coinTypes[indexPath.row]
+        cell.coinType = coinType
+        cell.accessoryType = self.coinType == coinType ? .checkmark : .none
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.didSelectCointype?(self.coinTypes[indexPath.row])
+        
+        if self.coinType == self.coinTypes[indexPath.row] {
+            return
+        }
+        
+        var affectedIndexPaths = [IndexPath]()
+        if let coinType = self.coinType {
+            if let index = self.coinTypes.index(where: { $0 == coinType }) {
+                affectedIndexPaths.append(IndexPath(row: index, section: 0))
+            }
+        }
+        
+        let coinType = self.coinTypes[indexPath.row]
+        self.coinType = coinType
+        affectedIndexPaths.append(indexPath)
+        self.tableView.reloadRows(at: affectedIndexPaths, with: .automatic)        
+        self.didSelectCointype?(coinType)
     }
     
     // MARK: -

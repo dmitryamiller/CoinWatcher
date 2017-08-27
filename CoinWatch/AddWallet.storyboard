@@ -13,7 +13,7 @@
         <scene sceneID="7Qh-cE-sjQ">
             <objects>
                 <navigationController id="A1R-Q8-56W" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tik-gO-SIe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tik-gO-SIe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -55,6 +55,9 @@
                             </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <segue destination="5p9-gj-5Eq" kind="show" identifier="coinType" id="UGj-sa-xac"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59Q-Xo-IOC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -103,17 +106,17 @@
                             <outlet property="delegate" destination="5p9-gj-5Eq" id="PU1-Ym-sxz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Currency Type" id="Y1d-pU-f6f">
+                    <navigationItem key="navigationItem" title="Coin Type" id="Y1d-pU-f6f">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="70N-cD-UB6">
                             <connections>
-                                <action selector="dismissSelf" destination="5p9-gj-5Eq" id="4UF-la-YAO"/>
+                                <action selector="dismissSelf" destination="5p9-gj-5Eq" id="fYP-4d-fTN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPr-J9-w2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-791" y="-691"/>
+            <point key="canvasLocation" x="881" y="-691"/>
         </scene>
     </scenes>
 </document>

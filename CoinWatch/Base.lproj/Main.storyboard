@@ -76,19 +76,27 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="??1,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Sg7-BA-lha">
-                                            <rect key="frame" x="155.5" y="22" width="173.5" height="21"/>
+                                            <rect key="frame" x="155.5" y="13" width="173.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? 1.000 BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Umm-oQ-3pq">
+                                            <rect key="frame" x="241" y="34" width="88" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                            <color key="textColor" red="0.41960784309999999" green="0.41960784309999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Sg7-BA-lha" firstAttribute="top" secondItem="5pS-n9-bpu" secondAttribute="top" id="3Gz-ln-WAB"/>
                                         <constraint firstItem="b6j-y6-Lac" firstAttribute="leading" secondItem="5pS-n9-bpu" secondAttribute="leading" id="6kp-La-N2i"/>
+                                        <constraint firstItem="Umm-oQ-3pq" firstAttribute="baseline" secondItem="b6j-y6-Lac" secondAttribute="baseline" id="8aI-7u-Efa"/>
                                         <constraint firstItem="b6j-y6-Lac" firstAttribute="top" secondItem="5pS-n9-bpu" secondAttribute="bottom" id="E1l-9t-WGv"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="b6j-y6-Lac" secondAttribute="bottom" constant="5" id="I0B-g9-SHX"/>
                                         <constraint firstItem="Sg7-BA-lha" firstAttribute="leading" secondItem="5pS-n9-bpu" secondAttribute="trailing" constant="20" id="JOX-MI-QjV"/>
                                         <constraint firstItem="5pS-n9-bpu" firstAttribute="top" secondItem="qzx-G1-xaY" secondAttribute="topMargin" constant="5" id="R37-0e-yFS"/>
-                                        <constraint firstItem="Sg7-BA-lha" firstAttribute="centerY" secondItem="qzx-G1-xaY" secondAttribute="centerY" id="SyV-ho-Qaa"/>
+                                        <constraint firstItem="Umm-oQ-3pq" firstAttribute="trailing" secondItem="Sg7-BA-lha" secondAttribute="trailing" id="XJx-XN-6Yy"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Sg7-BA-lha" secondAttribute="trailing" constant="5" id="ftV-p2-17z"/>
                                         <constraint firstItem="5pS-n9-bpu" firstAttribute="leading" secondItem="qzx-G1-xaY" secondAttribute="leadingMargin" constant="5" id="iJr-oI-V0U"/>
                                     </constraints>
@@ -97,6 +105,7 @@
                                     <outlet property="amountLabel" destination="Sg7-BA-lha" id="f5z-tb-EdD"/>
                                     <outlet property="coinTypeLabel" destination="b6j-y6-Lac" id="tyA-ne-moU"/>
                                     <outlet property="nameLabel" destination="5pS-n9-bpu" id="jwT-o4-FFn"/>
+                                    <outlet property="nativeAmountLabel" destination="Umm-oQ-3pq" id="odh-jD-AaZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
