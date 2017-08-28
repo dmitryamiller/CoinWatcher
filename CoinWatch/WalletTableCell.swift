@@ -37,6 +37,10 @@ class WalletTableCell: UITableViewCell {
             }
             
             self.watch(object: wallet, propertyName: #keyPath(Wallet.nativeBalance)) { [weak self] in
+                if wallet.nativeBalance < 0 {
+                    self?.nativeAmountLabel.text = "--"
+                    return
+                }
                 let formatter = NumberFormatter()
                 formatter.positiveFormat = "#,###.0000 \(wallet.coinType.rawValue)"
                 formatter.maximumFractionDigits = 4
