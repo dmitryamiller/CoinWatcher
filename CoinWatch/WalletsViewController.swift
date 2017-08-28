@@ -17,6 +17,7 @@ class WalletsViewController: UITableViewController {
     }
     
     private var walletsToken: NotificationToken?
+    private let totalModel = WalletTotalTableCell.Model()
     
     deinit {
         self.walletsToken?.stop()
@@ -48,13 +49,14 @@ class WalletsViewController: UITableViewController {
     
     // MARK: - TableViewDataSource and TableViewDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let tableSection = Section(rawValue: section) else { return 0 }
         
         switch tableSection {
+            case .total: return 1
             case .currency: return 1
             case .wallets: return max(self.wallets?.count ?? 0, 1)
         }
@@ -64,6 +66,11 @@ class WalletsViewController: UITableViewController {
         guard let section = Section(rawValue: indexPath.section) else { fatalError() }
         
         switch section {
+            case .total:
+                    let cell = tableView.dequeReusableCell(withType: WalletTotalTableCell.self)
+                    cell.model = self.totalModel
+                    return cell;
+            
             case .currency:
                     let cell = tableView.dequeReusableCell(withType: CurrentCurrencyTableCell.self)
                     cell.userPreferences = UserPreferences.current()
@@ -85,6 +92,7 @@ class WalletsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         guard let section = Section(rawValue: indexPath.section) else { return false }
         switch section {
+            case .total: return false
             case .currency: return false
             case .wallets: return self.wallets?.count ?? 0 > 0
         }
@@ -94,7 +102,7 @@ class WalletsViewController: UITableViewController {
         guard let section = Section(rawValue: indexPath.section) else { return  }
         
         switch section {
-            case .currency: return
+            case .total, .currency: return
             case .wallets:
                 guard let wallets = self.wallets else { return }
                 switch editingStyle {
@@ -110,6 +118,8 @@ class WalletsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch Section(rawValue: section)! {
+            case .total:
+                return "Total"
             case .currency:
                 return "Currency"
             case .wallets:
@@ -124,14 +134,19 @@ class WalletsViewController: UITableViewController {
     
     // MARK: - misc functions
     private func loadAndObserveWallets() {
-        let sections = IndexSet(integer: Section.wallets.rawValue)
+        var sections = IndexSet()
+        sections.insert(Section.total.rawValue)
+        sections.insert(Section.wallets.rawValue)
+        
         let realm = try! Realm()
         self.walletsToken = realm.objects(Wallet.self).sorted(byKeyPath: #keyPath(Wallet.sortIndex), ascending: false).addNotificationBlock() { [weak self] changes in
             switch changes {
                 case .initial(let wallets):
                     self?.wallets = wallets
+                    self?.computeTotal()
                     self?.tableView.reloadSections(sections, with: .automatic)
                 case .update(let wallets, let deletions, let insertions, _):
+                    self?.computeTotal()
                     if deletions.count > 0 || insertions.count > 0 {
                         self?.wallets = wallets
                         self?.tableView.reloadSections(sections, with: .automatic)
@@ -139,6 +154,25 @@ class WalletsViewController: UITableViewController {
                 case .error: break
             }
         }
+    }
+    
+    
+    
+    private func computeTotal() {
+        guard let wallets = self.wallets else { self.totalModel.amount = -1; return }
+        var total: Double = 0
+        var validItemsExist = false
+        for w in wallets {
+            if w.nativeBalance < 0 {
+                continue
+            }
+            
+            guard let ticker = w.ticker else { continue }
+            total += w.nativeBalance * ticker.price
+            validItemsExist = true
+        }
+        
+        self.totalModel.amount = validItemsExist ? total : -1
     }
     
     private func delete(wallet: Wallet) {
@@ -151,7 +185,8 @@ class WalletsViewController: UITableViewController {
 
 extension WalletsViewController {
     enum Section : Int {
-        case currency = 0
-        case wallets = 1
+        case total = 0
+        case currency = 1
+        case wallets = 2
     }
 }

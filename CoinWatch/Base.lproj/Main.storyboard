@@ -108,6 +108,31 @@
                                     <outlet property="nativeAmountLabel" destination="Umm-oQ-3pq" id="odh-jD-AaZ"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletTotalTableCell" id="MFm-Tn-bST" customClass="WalletTotalTableCell" customModule="CoinWatch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="208.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MFm-Tn-bST" id="KzQ-Cd-wzP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? 10,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohd-fn-Wai">
+                                            <rect key="frame" x="15" y="10" width="345" height="23.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="ohd-fn-Wai" secondAttribute="trailing" constant="15" id="S0W-OJ-Nav"/>
+                                        <constraint firstItem="ohd-fn-Wai" firstAttribute="top" secondItem="KzQ-Cd-wzP" secondAttribute="top" constant="10" id="fH2-Tm-CIV"/>
+                                        <constraint firstAttribute="bottom" secondItem="ohd-fn-Wai" secondAttribute="bottom" constant="10" id="kVr-nI-N1U"/>
+                                        <constraint firstItem="ohd-fn-Wai" firstAttribute="leading" secondItem="KzQ-Cd-wzP" secondAttribute="leading" constant="15" id="mra-2C-J20"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="amountLabel" destination="ohd-fn-Wai" id="0bd-Bl-QoT"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="rA0-xq-f8m" id="V8s-ln-K3G"/>

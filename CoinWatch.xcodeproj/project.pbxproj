@@ -15,6 +15,7 @@
 		3BA895F71F5223A300E52D76 /* SingleFieldEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895F61F5223A300E52D76 /* SingleFieldEntryViewController.swift */; };
 		3BA895F91F5226F700E52D76 /* AddWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895F81F5226F700E52D76 /* AddWalletViewController.swift */; };
 		3BA895FE1F523FDC00E52D76 /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895FD1F523FDC00E52D76 /* SelectCurrencyViewController.swift */; };
+		3BA896021F53905000E52D76 /* WalletTotalTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA896011F53905000E52D76 /* WalletTotalTableCell.swift */; };
 		3BA9B31D1F4D319C00B63364 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B31C1F4D319C00B63364 /* AppDelegate.swift */; };
 		3BA9B31F1F4D319C00B63364 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B31E1F4D319C00B63364 /* ViewController.swift */; };
 		3BA9B3221F4D319C00B63364 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BA9B3201F4D319C00B63364 /* Main.storyboard */; };
@@ -61,6 +62,7 @@
 		3BA895F61F5223A300E52D76 /* SingleFieldEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleFieldEntryViewController.swift; sourceTree = "<group>"; };
 		3BA895F81F5226F700E52D76 /* AddWalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWalletViewController.swift; sourceTree = "<group>"; };
 		3BA895FD1F523FDC00E52D76 /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
+		3BA896011F53905000E52D76 /* WalletTotalTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTotalTableCell.swift; sourceTree = "<group>"; };
 		3BA9B3191F4D319C00B63364 /* CoinWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BA9B31C1F4D319C00B63364 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BA9B31E1F4D319C00B63364 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			children = (
 				3BA9B3671F4E6E9F00B63364 /* WalletTableCell.swift */,
 				3BA895E41F50F20A00E52D76 /* CurrentCurrencyTableCell.swift */,
+				3BA896011F53905000E52D76 /* WalletTotalTableCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 			files = (
 				3BA9B3421F4D341D00B63364 /* UserPreferences.swift in Sources */,
 				3BA9B35B1F4D4AEB00B63364 /* CoinTypeViewController.swift in Sources */,
+				3BA896021F53905000E52D76 /* WalletTotalTableCell.swift in Sources */,
 				3BA9B3461F4D376800B63364 /* WalletsViewController.swift in Sources */,
 				3BA895FE1F523FDC00E52D76 /* SelectCurrencyViewController.swift in Sources */,
 				3BA9B3621F4E62F200B63364 /* WalletNameViewController.swift in Sources */,
