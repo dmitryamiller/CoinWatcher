@@ -233,7 +233,8 @@ extension CoinWatcher {
     
     static func fetchBitcoinBalance(for publicKey: String, currency: Currency) -> Promise <Void> {
         return Promise { fulfill, reject in
-            let urlString = "https://blockchain.info/q/addressbalance/\(publicKey)?confirmations=6"
+            //let urlString = "https://blockchain.info/q/addressbalance/\(publicKey)?confirmations=6"
+            let urlString = "https://blockchain.info/q/addressbalance/\(publicKey)?confirmations=0"
                         
             guard let url = URL(string: urlString) else { reject(NSError(domain: "url", code: 0, userInfo: nil)); return }
             let request = URLRequest(url: url)
