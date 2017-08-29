@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BITHockeyManager.shared().authenticator.authenticateInstallation() 
         
         _ = UserPreferences.current() // ensure the preferences exist
-        _ = CoinWatcher.instance
+        _ = CoinTickerManager.instance
+        _ = BitcoinManager.instance
         return true
     }
 

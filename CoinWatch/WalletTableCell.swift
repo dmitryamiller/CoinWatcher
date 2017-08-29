@@ -31,7 +31,7 @@ class WalletTableCell: UITableViewCell {
                 self?.nameLabel.text = self?.wallet?.name
             }
             
-            self.watch(object: wallet, propertyName: #keyPath(Wallet.ticker.price)) { [weak self] in
+            self.watch(object: wallet, propertyNames: [#keyPath(Wallet.nativeBalance), #keyPath(Wallet.ticker.price)], coalescing: true) { [weak self] in
                 guard false == (self?.wallet?.isInvalidated ?? true) else { return }
                 self?.amountLabel.text = WalletTableCell.format(nativeBalance: self?.wallet?.nativeBalance,price: self?.wallet?.ticker?.price, currency: userPreferences.currency)
             }
@@ -45,6 +45,7 @@ class WalletTableCell: UITableViewCell {
                 formatter.positiveFormat = "#,###.0000 \(wallet.coinType.rawValue)"
                 formatter.maximumFractionDigits = 4
                 formatter.minimumFractionDigits = 4
+                formatter.minimumIntegerDigits = 1
                 self?.nativeAmountLabel.text = formatter.string(from: wallet.nativeBalance as NSNumber)
             }
         }
@@ -64,6 +65,7 @@ class WalletTableCell: UITableViewCell {
         }
         
         let formatter = NumberFormatter()
+        formatter.minimumIntegerDigits = 1
         formatter.positiveFormat = "\(currency.symbol)#,###.##"
         formatter.minimumFractionDigits = 2
         return formatter.string(from: balance * price as NSNumber)

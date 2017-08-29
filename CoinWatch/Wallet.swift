@@ -35,6 +35,11 @@ class Wallet: Object {
         return realm.objects(Wallet.self).filter("%K = %@ AND %K = %@", #keyPath(Wallet.address), address, #keyPath(Wallet.coinTypeId), coinTypeId).first
     }
     
+    static func fetchWith(coinTypeId: String) -> Results<Wallet> {
+        let realm = try! Realm()
+        return realm.objects(Wallet.self).filter("%K = %@", #keyPath(Wallet.coinTypeId), coinTypeId)
+    }
+    
     static func exists(with address: String, coinType: CoinType) -> Bool {
         let realm = try! Realm()
         return realm.objects(Wallet.self).filter("%K = %@ AND %K = %@", #keyPath(Wallet.address), address, #keyPath(Wallet.coinTypeId), coinType.rawValue).first != nil

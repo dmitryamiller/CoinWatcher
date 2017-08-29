@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		30BF15DC8A498778DC66907C /* Pods_CoinWatchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95C1A1C4FF5B5973E2161AD /* Pods_CoinWatchTests.framework */; };
+		3B693AAC1F54F64700FB5A4F /* CoinTickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B693AAB1F54F64700FB5A4F /* CoinTickerManager.swift */; };
+		3B693AAE1F54F85700FB5A4F /* NetworkIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B693AAD1F54F85700FB5A4F /* NetworkIndicatorManager.swift */; };
+		3B693AB11F551A3300FB5A4F /* BitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B693AB01F551A3300FB5A4F /* BitcoinManager.swift */; };
 		3BA895E51F50F20A00E52D76 /* CurrentCurrencyTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895E41F50F20A00E52D76 /* CurrentCurrencyTableCell.swift */; };
 		3BA895EB1F521A5500E52D76 /* AddressEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895EA1F521A5500E52D76 /* AddressEntryViewController.swift */; };
 		3BA895EF1F52222E00E52D76 /* AddressEntry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BA895EE1F52222E00E52D76 /* AddressEntry.storyboard */; };
@@ -35,7 +38,6 @@
 		3BA9B3621F4E62F200B63364 /* WalletNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B3611F4E62F200B63364 /* WalletNameViewController.swift */; };
 		3BA9B3641F4E64F300B63364 /* NSObject+KVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B3631F4E64F300B63364 /* NSObject+KVO.swift */; };
 		3BA9B3681F4E6E9F00B63364 /* WalletTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B3671F4E6E9F00B63364 /* WalletTableCell.swift */; };
-		3BA9B36B1F4F479000B63364 /* CoinWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B36A1F4F479000B63364 /* CoinWatcher.swift */; };
 		3BA9B36D1F4F4B8500B63364 /* CoinTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B36C1F4F4B8500B63364 /* CoinTicker.swift */; };
 		3BA9B3711F4F4D2600B63364 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B3701F4F4D2600B63364 /* Currency.swift */; };
 		3BA9B3731F4F4D7300B63364 /* CoinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B3721F4F4D7300B63364 /* CoinType.swift */; };
@@ -55,6 +57,9 @@
 
 /* Begin PBXFileReference section */
 		1F20E4463BC389657E968D32 /* Pods-CoinWatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinWatchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoinWatchTests/Pods-CoinWatchTests.release.xcconfig"; sourceTree = "<group>"; };
+		3B693AAB1F54F64700FB5A4F /* CoinTickerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTickerManager.swift; sourceTree = "<group>"; };
+		3B693AAD1F54F85700FB5A4F /* NetworkIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkIndicatorManager.swift; sourceTree = "<group>"; };
+		3B693AB01F551A3300FB5A4F /* BitcoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitcoinManager.swift; sourceTree = "<group>"; };
 		3BA895E41F50F20A00E52D76 /* CurrentCurrencyTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentCurrencyTableCell.swift; sourceTree = "<group>"; };
 		3BA895EA1F521A5500E52D76 /* AddressEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressEntryViewController.swift; sourceTree = "<group>"; };
 		3BA895EE1F52222E00E52D76 /* AddressEntry.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddressEntry.storyboard; sourceTree = "<group>"; };
@@ -86,7 +91,6 @@
 		3BA9B3611F4E62F200B63364 /* WalletNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletNameViewController.swift; sourceTree = "<group>"; };
 		3BA9B3631F4E64F300B63364 /* NSObject+KVO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+KVO.swift"; sourceTree = "<group>"; };
 		3BA9B3671F4E6E9F00B63364 /* WalletTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTableCell.swift; sourceTree = "<group>"; };
-		3BA9B36A1F4F479000B63364 /* CoinWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinWatcher.swift; sourceTree = "<group>"; };
 		3BA9B36C1F4F4B8500B63364 /* CoinTicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTicker.swift; sourceTree = "<group>"; };
 		3BA9B3701F4F4D2600B63364 /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		3BA9B3721F4F4D7300B63364 /* CoinType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinType.swift; sourceTree = "<group>"; };
@@ -193,7 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				3BA9B3761F4FE22D00B63364 /* Utils */,
-				3BA9B3691F4F475300B63364 /* CoinWatcher */,
+				3BA9B3691F4F475300B63364 /* Managers */,
 				3BA9B34F1F4D413C00B63364 /* Extensions */,
 				3BA9B33C1F4D32CE00B63364 /* Model */,
 				3BA9B3431F4D362100B63364 /* ViewControllers */,
@@ -266,12 +270,14 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
-		3BA9B3691F4F475300B63364 /* CoinWatcher */ = {
+		3BA9B3691F4F475300B63364 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				3BA9B36A1F4F479000B63364 /* CoinWatcher.swift */,
+				3B693AAB1F54F64700FB5A4F /* CoinTickerManager.swift */,
+				3B693AAD1F54F85700FB5A4F /* NetworkIndicatorManager.swift */,
+				3B693AB01F551A3300FB5A4F /* BitcoinManager.swift */,
 			);
-			name = CoinWatcher;
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		3BA9B3761F4FE22D00B63364 /* Utils */ = {
@@ -532,8 +538,10 @@
 				3BA9B31F1F4D319C00B63364 /* ViewController.swift in Sources */,
 				3BA9B3681F4E6E9F00B63364 /* WalletTableCell.swift in Sources */,
 				3BA9B31D1F4D319C00B63364 /* AppDelegate.swift in Sources */,
-				3BA9B36B1F4F479000B63364 /* CoinWatcher.swift in Sources */,
+				3B693AAE1F54F85700FB5A4F /* NetworkIndicatorManager.swift in Sources */,
+				3B693AB11F551A3300FB5A4F /* BitcoinManager.swift in Sources */,
 				3BA895EB1F521A5500E52D76 /* AddressEntryViewController.swift in Sources */,
+				3B693AAC1F54F64700FB5A4F /* CoinTickerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
