@@ -22,8 +22,7 @@ class BitcoinManager: NSObject {
         super.init()
         self.loadAndWatchWallets()
     }
-    
-    
+        
     private func loadAndWatchWallets() {
         self.walletsToken = Wallet.fetchWith(coinTypeId: CoinType.bitcoin.rawValue).addNotificationBlock() { [weak self] changes in
             switch changes {
