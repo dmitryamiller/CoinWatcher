@@ -42,9 +42,9 @@ class WalletTableCell: UITableViewCell {
                     return
                 }
                 let formatter = NumberFormatter()
-                formatter.positiveFormat = "#,###.0000 \(wallet.coinType.rawValue)"
-                formatter.maximumFractionDigits = 4
-                formatter.minimumFractionDigits = 4
+                formatter.positiveFormat = "#,###.000 \(wallet.coinType.rawValue)"
+                formatter.maximumFractionDigits = 3
+                formatter.minimumFractionDigits = 3
                 formatter.minimumIntegerDigits = 1
                 self?.nativeAmountLabel.text = formatter.string(from: wallet.nativeBalance as NSNumber)
             }

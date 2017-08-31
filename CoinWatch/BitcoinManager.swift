@@ -81,7 +81,6 @@ class BitcoinManager: NSObject {
             }
             
             dataTask.resume()
-            
         }
     }
 
@@ -95,8 +94,47 @@ class BitcoinManager: NSObject {
                       let nativeBalance = addrJson["final_balance"] as? Double else { continue }
                 guard let wallet = Wallet.fetchWith(address: addr, coinTypeId: CoinType.bitcoin.rawValue) else { continue }
                 wallet.nativeBalance = nativeBalance / 100000000
+            }
+        }
+        
+        if let transactions = json["txs"] as? Array<[String : Any]> {
+            for txJson in transactions {
+                guard let amount = txJson["result"] as? Double,
+                      let hash = txJson["hash"] as? String
+                else { continue }
+                
+                let existingTx = CoinTransaction.transaction(withHash: hash, coinType: .bitcoin)
+                let shouldAdd: Bool = existingTx == nil
                 
                 
+                guard let outJson = (txJson["out"] as? Array<[String : Any]>)?.first else { continue }
+                let xpub = (outJson["xpub"] as? [String : Any])?["m"] as? String
+                var address = xpub
+                if address == nil {
+                    address = outJson["addres"] as? String
+                }
+                
+                guard let wallet = Wallet.fetchWith(address: address ?? "", coinTypeId: CoinType.bitcoin.rawValue) else { continue }
+                
+                let tx = existingTx ?? CoinTransaction()
+                
+                tx.txHash = hash
+                tx.nativeAmount = amount / 100000000
+                
+                if let balance = txJson["balance"] as? Double {
+                    tx.nativeBalance = balance / 100000000
+                } else {
+                    tx.nativeBalance = -1
+                }
+                
+                tx.wallet = wallet
+                if let time = txJson["time"] as? TimeInterval {
+                    tx.date = Date(timeIntervalSince1970: time)
+                }
+                
+                if shouldAdd {
+                    realm.add(tx)
+                }
             }
         }
         
@@ -111,7 +149,7 @@ extension BitcoinManager {
         return Promise <[String : Any]> { fulfill, reject in
             //https://blockchain.info/multiaddr?active=xpub6CRM8u6Fo9XJyG7xdvcvm7e4Rb1BXQGM6QR9GPLhx9nYvXoCpBb4Nt1ibNgFSYsckvzqSscs9HhpivGQkkYRULjYHwe9D6n2gMgY3ZBhpNX|19Px1fDwhWZULgPr4NvUcNULDo1V6gKhpd&format=json&currency=EUR
             
-            let urlStr = "https://blockchain.info/multiaddr?active=\(addresses.joined(separator: "%7C"))&format=json"
+            let urlStr = "https://blockchain.info/multiaddr?active=\(addresses.joined(separator: "%7C"))"
             let url = URL(string: urlStr)
             let request = URLRequest(url: url!)
             let session = URLSession.shared

@@ -44,6 +44,8 @@ class WalletsViewController: UITableViewController {
                 try! realm.commitWrite()
                 self?.navigationController?.popViewController(animated: true)
             }
+        } else if let transactionsViewController = segue.destination as? CoinTransactionsViewController {
+            transactionsViewController.wallet = (sender as? WalletTableCell)?.wallet
         }
     }
     
@@ -109,7 +111,7 @@ class WalletsViewController: UITableViewController {
                 case .insert, .none: return
                 case .delete:
                     let wallet = wallets[indexPath.row]
-                    self.delete(wallet: wallet)
+                    Wallet.delete(wallet: wallet)
                 }
         }
         
@@ -173,13 +175,6 @@ class WalletsViewController: UITableViewController {
         }
         
         self.totalModel.amount = validItemsExist ? total : -1
-    }
-    
-    private func delete(wallet: Wallet) {
-        let realm = try! Realm()
-        realm.beginWrite()
-        realm.delete(wallet)
-        try! realm.commitWrite()
     }
 }
 
