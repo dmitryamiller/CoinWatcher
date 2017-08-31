@@ -11,74 +11,47 @@ import PromiseKit
 import RealmSwift
 
 class BitcoinManager: NSObject {
-    static let pollTimeout: TimeInterval = 10.5
+    static let pollTimeout: TimeInterval = 11
     
     static let instance = BitcoinManager()
     
     private var walletsToken: NotificationToken!
     private var syncInProgress = false
+    private var timer: Timer!
     
     override init() {
         super.init()
-        self.loadAndWatchWallets()
-    }
-        
-    private func loadAndWatchWallets() {
-        self.walletsToken = Wallet.fetchWith(coinTypeId: CoinType.bitcoin.rawValue).addNotificationBlock() { [weak self] changes in
-            switch changes {
-                case .initial(let wallets):
-                    if wallets.count > 0 {
-                        self?.sync()
-                    }
-                case .update(let wallets, let deletions, let insertions, _):
-                    if wallets.count > 0 && (deletions.count > 0 || insertions.count > 0) {
-                        self?.sync()
-                    }
-                case .error:
-                    break
-            }
-        }
-    }
-    
-    private func scheduleNextSync() {
-        let newTask = DispatchWorkItem { [weak self] in
+        self.timer = Timer.scheduledTimer(withTimeInterval: BitcoinManager.pollTimeout, repeats: true) { [weak self] _ in
+            print("Timer fire")
             self?.sync()
         }
-
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + BitcoinManager.pollTimeout, execute: newTask)
+        
+        self.timer.fire()
     }
     
     private func sync() {
+        // only one at a time
         if self.syncInProgress {
             return
         }
         
         self.syncInProgress = true
         
-        if let w = Wallet.fetchWith(coinTypeId: CoinType.bitcoin.rawValue).sorted(byKeyPath: #keyPath(Wallet.lastUpdatedAt), ascending: true).first {
-                let walletUUID = w.uuid
-                NetworkIndicatorManager.instance.show()
-                BitcoinManager.fetchAmount(forBitcoinAddress: w.address).then { nativeBalance -> Void in
-                        print("Fetched native balance: \(nativeBalance)")
-                        let realm = try! Realm()
-                        realm.beginWrite()
-                    
-                        if let wallet = realm.object(ofType: Wallet.self, forPrimaryKey: walletUUID) {
-                            wallet.nativeBalance = nativeBalance
-                            wallet.lastUpdatedAt = Date().timeIntervalSince1970
-                        }
-                        
-                        try? realm.commitWrite()
-                    }.catch { error in
-                        print("Error retrieving Bitcoin balance:" + error.localizedDescription)
-                    }.always { [weak self] in
-                        NetworkIndicatorManager.instance.hide()
-                        self?.syncInProgress = false
-                        self?.scheduleNextSync()
-                    }            
-        } else {
+        let wallets = Wallet.fetchWith(coinTypeId: CoinType.bitcoin.rawValue)
+        if wallets.count > 0 {
+            NetworkIndicatorManager.instance.show()
+            
+            BitcoinManager.fetchBalanceAndTransactions(for: wallets.map({ $0.address })).then { json -> Void in
+                BitcoinManager.processBalancesAndTransactions(json: json)
+            }.catch { error in
+                print("Error retrieving Bitcoin balance:" + error.localizedDescription)
+            }.always { [weak self] in
+                NetworkIndicatorManager.instance.hide()
+                self?.syncInProgress = false
+            }
+        }
+        else {
             self.syncInProgress = false
-            self.scheduleNextSync()
         }
     }
     
@@ -112,4 +85,52 @@ class BitcoinManager: NSObject {
         }
     }
 
+    private static func processBalancesAndTransactions(json: [String : Any]) {
+        let realm = try! Realm()
+        realm.beginWrite()
+        
+        if let addresses = json["addresses"] as? Array<[String : Any ]> {
+            for addrJson in addresses {
+                guard let addr = addrJson["address"] as? String,
+                      let nativeBalance = addrJson["final_balance"] as? Double else { continue }
+                guard let wallet = Wallet.fetchWith(address: addr, coinTypeId: CoinType.bitcoin.rawValue) else { continue }
+                wallet.nativeBalance = nativeBalance / 100000000
+                
+                
+            }
+        }
+        
+        try? realm.commitWrite()
+    }
+}
+
+
+
+extension BitcoinManager {
+    static func fetchBalanceAndTransactions(for addresses: [String]) -> Promise <[String : Any]> {
+        return Promise <[String : Any]> { fulfill, reject in
+            //https://blockchain.info/multiaddr?active=xpub6CRM8u6Fo9XJyG7xdvcvm7e4Rb1BXQGM6QR9GPLhx9nYvXoCpBb4Nt1ibNgFSYsckvzqSscs9HhpivGQkkYRULjYHwe9D6n2gMgY3ZBhpNX|19Px1fDwhWZULgPr4NvUcNULDo1V6gKhpd&format=json&currency=EUR
+            
+            let urlStr = "https://blockchain.info/multiaddr?active=\(addresses.joined(separator: "%7C"))&format=json"
+            let url = URL(string: urlStr)
+            let request = URLRequest(url: url!)
+            let session = URLSession.shared
+            
+            let dataTask = session.dataTask(with: request) { data, response, error in
+                if let data = data {
+                    if let response = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String : Any] {
+                        fulfill(response)
+                    } else {
+                        reject(NSError(domain: "badResponse", code: 0, userInfo: nil))
+                    }
+                } else if let error = error {
+                    reject(error)
+                } else {
+                    reject(NSError(domain: "nothing", code: 0, userInfo: nil))
+                }
+            }
+            
+            dataTask.resume()
+        }
+    }
 }
