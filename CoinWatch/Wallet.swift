@@ -65,6 +65,21 @@ class Wallet: Object {
         return realm.object(ofType: Wallet.self, forPrimaryKey: w.uuid)        
     }
     
+    static func delete(wallet: Wallet) {
+        let realm = try! Realm()
+        
+        realm.beginWrite()
+        if let w = realm.object(ofType: Wallet.self, forPrimaryKey: wallet.uuid) {
+            for tx in CoinTransaction.transactions(for: w) {
+                realm.delete(tx)
+            }
+            
+            realm.delete(w)
+        }
+        
+        try? realm.commitWrite()
+    }
+    
     static func defaultName(for coinType: CoinType) -> String {
         let realm = try! Realm()
         let numExisting  = realm.objects(Wallet.self).filter("%K = %@", #keyPath(Wallet.coinTypeId), coinType.rawValue).count

@@ -106,6 +106,7 @@
                                     <outlet property="coinTypeLabel" destination="b6j-y6-Lac" id="tyA-ne-moU"/>
                                     <outlet property="nameLabel" destination="5pS-n9-bpu" id="jwT-o4-FFn"/>
                                     <outlet property="nativeAmountLabel" destination="Umm-oQ-3pq" id="odh-jD-AaZ"/>
+                                    <segue destination="30p-11-2Xz" kind="show" id="HBT-jx-gsm"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletTotalTableCell" id="MFm-Tn-bST" customClass="WalletTotalTableCell" customModule="CoinWatch" customModuleProvider="target">
@@ -187,7 +188,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5HN-9B-fDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1650" y="136"/>
+            <point key="canvasLocation" x="1732" y="-393"/>
         </scene>
         <!--AddWallet-->
         <scene sceneID="1ge-Wd-9SX">
@@ -196,6 +197,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZE-fl-7dF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="923" y="562"/>
+        </scene>
+        <!--Transactions-->
+        <scene sceneID="Uzv-lY-JRz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Transactions" id="30p-11-2Xz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="obh-qz-vm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1732" y="341"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pY3-XQ-XFh">

@@ -42,6 +42,10 @@
 		3BA9B3711F4F4D2600B63364 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B3701F4F4D2600B63364 /* Currency.swift */; };
 		3BA9B3731F4F4D7300B63364 /* CoinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B3721F4F4D7300B63364 /* CoinType.swift */; };
 		3BA9B3781F4FE23900B63364 /* Invalidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA9B3771F4FE23900B63364 /* Invalidator.swift */; };
+		3BF7195B1F57D77000F0DB48 /* CoinTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7195A1F57D77000F0DB48 /* CoinTransaction.swift */; };
+		3BF7195E1F57E16C00F0DB48 /* Transactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7195D1F57E16C00F0DB48 /* Transactions.storyboard */; };
+		3BF719611F57E68800F0DB48 /* CoinTransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF719601F57E68800F0DB48 /* CoinTransactionCell.swift */; };
+		3BF719631F57E99500F0DB48 /* CoinTransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF719621F57E99500F0DB48 /* CoinTransactionsViewController.swift */; };
 		9F311293E08D231417CBDEF3 /* Pods_CoinWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDE108A3A699CEA56CC2A8A5 /* Pods_CoinWatch.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +99,10 @@
 		3BA9B3701F4F4D2600B63364 /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		3BA9B3721F4F4D7300B63364 /* CoinType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinType.swift; sourceTree = "<group>"; };
 		3BA9B3771F4FE23900B63364 /* Invalidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invalidator.swift; sourceTree = "<group>"; };
+		3BF7195A1F57D77000F0DB48 /* CoinTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTransaction.swift; sourceTree = "<group>"; };
+		3BF7195D1F57E16C00F0DB48 /* Transactions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Transactions.storyboard; sourceTree = "<group>"; };
+		3BF719601F57E68800F0DB48 /* CoinTransactionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTransactionCell.swift; sourceTree = "<group>"; };
+		3BF719621F57E99500F0DB48 /* CoinTransactionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTransactionsViewController.swift; sourceTree = "<group>"; };
 		43A35E739F178AFCEE2ABC02 /* Pods-CoinWatchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinWatchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoinWatchTests/Pods-CoinWatchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B1B5B85EA6898E39AF0B3F3C /* Pods-CoinWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinWatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoinWatch/Pods-CoinWatch.debug.xcconfig"; sourceTree = "<group>"; };
 		BDE108A3A699CEA56CC2A8A5 /* Pods_CoinWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoinWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +235,7 @@
 				3BA9B36C1F4F4B8500B63364 /* CoinTicker.swift */,
 				3BA9B3701F4F4D2600B63364 /* Currency.swift */,
 				3BA9B3721F4F4D7300B63364 /* CoinType.swift */,
+				3BF7195A1F57D77000F0DB48 /* CoinTransaction.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -234,6 +243,7 @@
 		3BA9B3431F4D362100B63364 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3BF7195C1F57E15000F0DB48 /* Transactions */,
 				3BA895F31F52236C00E52D76 /* Single Field Entry */,
 				3BA895ED1F52221800E52D76 /* Address Entry */,
 				3BA895E81F52198800E52D76 /* Main */,
@@ -286,6 +296,24 @@
 				3BA9B3771F4FE23900B63364 /* Invalidator.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		3BF7195C1F57E15000F0DB48 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				3BF7195F1F57E67900F0DB48 /* Views */,
+				3BF7195D1F57E16C00F0DB48 /* Transactions.storyboard */,
+				3BF719621F57E99500F0DB48 /* CoinTransactionsViewController.swift */,
+			);
+			name = Transactions;
+			sourceTree = "<group>";
+		};
+		3BF7195F1F57E67900F0DB48 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3BF719601F57E68800F0DB48 /* CoinTransactionCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		4CEAC7189315889211CDBEE4 /* Frameworks */ = {
@@ -406,6 +434,7 @@
 				3BA9B3571F4D491300B63364 /* AddWallet.storyboard in Resources */,
 				3BA895EF1F52222E00E52D76 /* AddressEntry.storyboard in Resources */,
 				3BA9B3221F4D319C00B63364 /* Main.storyboard in Resources */,
+				3BF7195E1F57E16C00F0DB48 /* Transactions.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,8 +549,10 @@
 				3BA9B35B1F4D4AEB00B63364 /* CoinTypeViewController.swift in Sources */,
 				3BA896021F53905000E52D76 /* WalletTotalTableCell.swift in Sources */,
 				3BA9B3461F4D376800B63364 /* WalletsViewController.swift in Sources */,
+				3BF719631F57E99500F0DB48 /* CoinTransactionsViewController.swift in Sources */,
 				3BA895FE1F523FDC00E52D76 /* SelectCurrencyViewController.swift in Sources */,
 				3BA9B3621F4E62F200B63364 /* WalletNameViewController.swift in Sources */,
+				3BF7195B1F57D77000F0DB48 /* CoinTransaction.swift in Sources */,
 				3BA9B3711F4F4D2600B63364 /* Currency.swift in Sources */,
 				3BA895F91F5226F700E52D76 /* AddWalletViewController.swift in Sources */,
 				3BA9B3731F4F4D7300B63364 /* CoinType.swift in Sources */,
@@ -535,6 +566,7 @@
 				3BA9B35E1F4D4B7A00B63364 /* UIViewController+DefaultActions.swift in Sources */,
 				3BA9B3511F4D416200B63364 /* UITableView+CoinWatch.swift in Sources */,
 				3BA895F71F5223A300E52D76 /* SingleFieldEntryViewController.swift in Sources */,
+				3BF719611F57E68800F0DB48 /* CoinTransactionCell.swift in Sources */,
 				3BA9B31F1F4D319C00B63364 /* ViewController.swift in Sources */,
 				3BA9B3681F4E6E9F00B63364 /* WalletTableCell.swift in Sources */,
 				3BA9B31D1F4D319C00B63364 /* AppDelegate.swift in Sources */,
