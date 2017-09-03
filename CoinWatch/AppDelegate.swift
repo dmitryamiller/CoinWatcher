@@ -8,6 +8,7 @@
 
 import UIKit
 import HockeySDK
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,9 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BITHockeyManager.shared().start()
         BITHockeyManager.shared().authenticator.authenticateInstallation() 
         
+        // init realm
+        var config = Realm.Configuration()
+        config.fileURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.goblin77.CoinWatch")!.appendingPathComponent("default.realm")
+        Realm.Configuration.defaultConfiguration = config
+        
+        
         _ = UserPreferences.current() // ensure the preferences exist
         _ = CoinTickerManager.instance
-        _ = BitcoinManager.instance
+        
+        
+        
         return true
     }
 

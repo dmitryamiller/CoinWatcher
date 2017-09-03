@@ -38,7 +38,6 @@ class CoinTickerManager: NSObject {
         
         for wallet in realm.objects(Wallet.self) {
             wallet.ticker = realm.object(ofType: CoinTicker.self, forPrimaryKey: CoinTicker.uuid(forCoinTypeId: wallet.coinTypeId, currencyId: currencyType))
-            wallet.lastUpdatedAt = 0
         }
         try? realm.commitWrite()
     }

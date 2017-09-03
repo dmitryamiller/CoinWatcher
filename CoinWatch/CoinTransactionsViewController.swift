@@ -8,13 +8,16 @@
 
 import UIKit
 import RealmSwift
+import PromiseKit
+import SVPullToRefresh
 
 class CoinTransactionsViewController: UITableViewController {
+    private static let timeTransactionsValid: TimeInterval = 10
+    
     var wallet: Wallet?
     
     private var transactions = [CoinTransaction]()
     private var transactionsToken: NotificationToken?
-    
     deinit {
         self.transactionsToken?.stop()
     }
@@ -23,6 +26,29 @@ class CoinTransactionsViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.estimatedRowHeight = 65
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.tableView.addPullToRefresh { [weak self] in
+            guard let wallet = self?.wallet else { self?.tableView.pullToRefreshView.stopAnimating(); return }
+            
+            if Date().timeIntervalSince1970 - wallet.lastTxSync.timeIntervalSince1970  < CoinTransactionsViewController.timeTransactionsValid {
+                DispatchQueue.main.async {
+                    self?.tableView.pullToRefreshView.stopAnimating()
+                }
+                
+                return
+            }
+            
+            NetworkIndicatorManager.instance.show()
+            self?.fetchTransactions().always {
+                let realm = try! Realm()
+                realm.beginWrite()
+                wallet.lastTxSync = Date()
+                try? realm.commitWrite()
+                NetworkIndicatorManager.instance.hide()
+                self?.tableView.pullToRefreshView.stopAnimating()
+            }
+        }
+        
         self.loadAndObserveTransactions()
     }
     
@@ -55,6 +81,7 @@ class CoinTransactionsViewController: UITableViewController {
                 case .initial(let transactions):
                     self?.transactions = transactions.map { $0 }
                     self?.tableView.reloadData()
+                    self?.tableView.triggerPullToRefresh()
                 case .update(let transactions, let deletions, let insertions, _):
                     if insertions.count > 0 || deletions.count > 0 {
                         self?.transactions = transactions.map { $0 }
@@ -65,11 +92,31 @@ class CoinTransactionsViewController: UITableViewController {
             }
         }
     }
+    
+    private func fetchTransactions() -> Promise<Void> {
+        guard let wallet = self.wallet,
+              let coinType = self.wallet?.coinType
+        else { return Promise<Void>(error: FetchError.unknown) }
+        
+        switch coinType {
+            case .bitcoin:
+                return BitcoinManager.instance.fetchTransactions(for: wallet.address)
+            case .etherium:
+                return Promise<Void>(error: FetchError.unsupported)
+        }
+    }
 }
 
 extension CoinTransactionsViewController {
     enum Section : Int {
         case zeroData, tx
+    }
+}
+
+extension CoinTransactionsViewController {
+    enum FetchError : Error {
+        case unknown
+        case unsupported
     }
 }
 

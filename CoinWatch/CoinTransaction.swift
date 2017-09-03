@@ -26,8 +26,8 @@ class CoinTransaction: Object {
         return realm.objects(CoinTransaction.self).filter("%K = %@", #keyPath(CoinTransaction.wallet), wallet)
     }
     
-    static func transaction(withHash txHash: String, coinType: CoinType) -> CoinTransaction? {
+    static func transaction(with txHash: String, wallet: Wallet) -> CoinTransaction? {
         let realm = try! Realm()
-        return realm.objects(CoinTransaction.self).filter("%K = %@ AND %K = %@", #keyPath(CoinTransaction.txHash), txHash, #keyPath(CoinTransaction.wallet.coinTypeId), coinType.rawValue).first
-    }
+        return realm.objects(CoinTransaction.self).filter("%K = %@ AND %K = %@", #keyPath(CoinTransaction.txHash), txHash, #keyPath(CoinTransaction.wallet), wallet).first
+    }    
 }

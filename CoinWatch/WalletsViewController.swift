@@ -8,13 +8,12 @@
 
 import UIKit
 import RealmSwift
+import PromiseKit
+import SVPullToRefresh
 
 class WalletsViewController: UITableViewController {
-    private var wallets: Results<Wallet>? {
-        didSet {
-            
-        }
-    }
+    private static let timeWalletBalanceValid: TimeInterval = 10
+    private var wallets: Results<Wallet>? 
     
     private var walletsToken: NotificationToken?
     private let totalModel = WalletTotalTableCell.Model()
@@ -29,6 +28,12 @@ class WalletsViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         self.loadAndObserveWallets()
+        
+        self.tableView.addPullToRefresh { [weak self] in
+            self?.fetchWalletBalances().always {
+                self?.tableView.pullToRefreshView.stopAnimating()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -147,18 +152,43 @@ class WalletsViewController: UITableViewController {
                     self?.wallets = wallets
                     self?.computeTotal()
                     self?.tableView.reloadSections(sections, with: .automatic)
+                    let _ = self?.fetchWalletBalances()
+
                 case .update(let wallets, let deletions, let insertions, _):
                     self?.computeTotal()
+                    if insertions.count > 0 { // new wallet
+                        let _ = self?.fetchWalletBalances()
+                    }
                     if deletions.count > 0 || insertions.count > 0 {
                         self?.wallets = wallets
                         self?.tableView.reloadSections(sections, with: .automatic)
                     }
+                
+                
                 case .error: break
             }
         }
     }
     
-    
+    private func fetchWalletBalances() -> Promise<Void> {
+        let realm = try! Realm()
+        var coinTypePromises = [Promise<Void>]()
+        let timeUpdateAvailable = Date().addingTimeInterval(-WalletsViewController.timeWalletBalanceValid)
+        
+        for coinType in Set(realm.objects(Wallet.self)
+                .filter("%K <= %@", #keyPath(Wallet.lastBalanceSync), timeUpdateAvailable)
+                .map { $0.coinType }) {
+                    switch coinType {
+                        case .bitcoin:
+                            coinTypePromises.append(BitcoinManager.instance.fetchWalletBalances())
+                        case .etherium:
+                            break
+                    }
+        }
+        
+        print("updating for \(coinTypePromises.count) coin types")
+        return when(fulfilled: coinTypePromises)
+    }
     
     private func computeTotal() {
         guard let wallets = self.wallets else { self.totalModel.amount = -1; return }

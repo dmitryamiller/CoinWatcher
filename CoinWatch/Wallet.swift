@@ -14,10 +14,11 @@ class Wallet: Object {
     dynamic var name: String = ""
     dynamic var nativeBalance: Double = 0
     dynamic var address: String = ""
-    dynamic var addressValid: Bool = true
-    dynamic var sortIndex: Int = 0
-    dynamic var lastUpdatedAt: TimeInterval = 0
     dynamic var ticker: CoinTicker?
+    dynamic var lastTxSync: Date = Date(timeIntervalSince1970: 0)
+    dynamic var lastBalanceSync: Date = Date(timeIntervalSince1970: 0)
+    
+    dynamic var sortIndex: Int = 0 // sorting
     
     var coinType: CoinType {
         get {

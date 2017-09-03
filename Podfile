@@ -9,6 +9,7 @@ target 'CoinWatch' do
   pod 'RealmSwift'
   pod "PromiseKit", "~> 4.0"
   pod "HockeySDK", :subspecs => ['AllFeaturesLib']
+  pod "SVPullToRefresh"
 
   target 'CoinWatchTests' do
     inherit! :search_paths
