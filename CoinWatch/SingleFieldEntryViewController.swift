@@ -59,4 +59,8 @@ extension SingleFieldEntryViewController : UITextFieldDelegate {
         
         return false
     }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return true
+    }
 }
