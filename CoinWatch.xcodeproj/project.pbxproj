@@ -45,6 +45,8 @@
 		3BC5EC9A1F5CC6E700D6AB4A /* UIView+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5EC991F5CC6E700D6AB4A /* UIView+Extra.swift */; };
 		3BC5EC9E1F5CC81F00D6AB4A /* BusyIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5EC9D1F5CC81F00D6AB4A /* BusyIndicatorManager.swift */; };
 		3BC5ECA01F5CD1F200D6AB4A /* BusyIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BC5EC9F1F5CD1F200D6AB4A /* BusyIndicatorView.xib */; };
+		3BC5ECA21F5CD60C00D6AB4A /* EtheriumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5ECA11F5CD60C00D6AB4A /* EtheriumManager.swift */; };
+		3BC5ECA41F5CD6C800D6AB4A /* CoinWatcherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5ECA31F5CD6C800D6AB4A /* CoinWatcherError.swift */; };
 		3BF7195B1F57D77000F0DB48 /* CoinTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7195A1F57D77000F0DB48 /* CoinTransaction.swift */; };
 		3BF7195E1F57E16C00F0DB48 /* Transactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7195D1F57E16C00F0DB48 /* Transactions.storyboard */; };
 		3BF719611F57E68800F0DB48 /* CoinTransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF719601F57E68800F0DB48 /* CoinTransactionCell.swift */; };
@@ -106,6 +108,8 @@
 		3BC5EC991F5CC6E700D6AB4A /* UIView+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extra.swift"; sourceTree = "<group>"; };
 		3BC5EC9D1F5CC81F00D6AB4A /* BusyIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusyIndicatorManager.swift; sourceTree = "<group>"; };
 		3BC5EC9F1F5CD1F200D6AB4A /* BusyIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusyIndicatorView.xib; sourceTree = "<group>"; };
+		3BC5ECA11F5CD60C00D6AB4A /* EtheriumManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EtheriumManager.swift; sourceTree = "<group>"; };
+		3BC5ECA31F5CD6C800D6AB4A /* CoinWatcherError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinWatcherError.swift; sourceTree = "<group>"; };
 		3BF7195A1F57D77000F0DB48 /* CoinTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTransaction.swift; sourceTree = "<group>"; };
 		3BF7195D1F57E16C00F0DB48 /* Transactions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Transactions.storyboard; sourceTree = "<group>"; };
 		3BF719601F57E68800F0DB48 /* CoinTransactionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTransactionCell.swift; sourceTree = "<group>"; };
@@ -293,10 +297,12 @@
 		3BA9B3691F4F475300B63364 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				3BC5EC9D1F5CC81F00D6AB4A /* BusyIndicatorManager.swift */,
 				3B693AAB1F54F64700FB5A4F /* CoinTickerManager.swift */,
 				3B693AAD1F54F85700FB5A4F /* NetworkIndicatorManager.swift */,
 				3B693AB01F551A3300FB5A4F /* BitcoinManager.swift */,
-				3BC5EC9D1F5CC81F00D6AB4A /* BusyIndicatorManager.swift */,
+				3BC5ECA11F5CD60C00D6AB4A /* EtheriumManager.swift */,
+				3BC5ECA31F5CD6C800D6AB4A /* CoinWatcherError.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -584,6 +590,7 @@
 				3BA9B3641F4E64F300B63364 /* NSObject+KVO.swift in Sources */,
 				3BA9B3781F4FE23900B63364 /* Invalidator.swift in Sources */,
 				3BA895E51F50F20A00E52D76 /* CurrentCurrencyTableCell.swift in Sources */,
+				3BC5ECA21F5CD60C00D6AB4A /* EtheriumManager.swift in Sources */,
 				3BA9B3591F4D49CF00B63364 /* CoinTypeTableCell.swift in Sources */,
 				3BA9B3601F4D4FC500B63364 /* ScanQRViewController.swift in Sources */,
 				3BA9B3401F4D332E00B63364 /* Wallet.swift in Sources */,
@@ -600,6 +607,7 @@
 				3BC5EC9E1F5CC81F00D6AB4A /* BusyIndicatorManager.swift in Sources */,
 				3B693AB11F551A3300FB5A4F /* BitcoinManager.swift in Sources */,
 				3BA895EB1F521A5500E52D76 /* AddressEntryViewController.swift in Sources */,
+				3BC5ECA41F5CD6C800D6AB4A /* CoinWatcherError.swift in Sources */,
 				3B693AAC1F54F64700FB5A4F /* CoinTickerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
