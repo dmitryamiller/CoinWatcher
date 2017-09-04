@@ -55,9 +55,9 @@ class AddWalletViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { [weak self] _ in
                 if self?.addressEntry?.entryType == .manual {
                     self?.navigationController?.popViewController(animated: true)
-                } else {
-                    self?.addressEntry?.restartIfApplicable()
                 }
+                
+                self?.addressEntry?.restartIfApplicable()
             }))
             self.present(alert, animated: true, completion: nil)
             return

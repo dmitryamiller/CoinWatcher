@@ -22,16 +22,18 @@ class BusyIndicatorManager: NSObject {
     
     func show() {
         guard false == isShown else { return }
-        guard let keyWindow = UIApplication.shared.keyWindow else { return }
+        guard let view = UIApplication.shared.keyWindow?.rootViewController?.view else { return }
         
         self.isShown = true
-        keyWindow.addSubview(self.buzyIndicatorView)
+        view.addSubview(self.buzyIndicatorView)
         
     }
     
     func hide() {
         guard self.isShown else { return }
         self.buzyIndicatorView.removeFromSuperview()
+        self.isShown = false
+        
     }
 
 }
