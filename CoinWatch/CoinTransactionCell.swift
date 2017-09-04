@@ -17,7 +17,7 @@ class CoinTransactionCell: UITableViewCell {
     var tx: CoinTransaction? {
         didSet {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/YYYY hh:mm:ssss a"
+            dateFormatter.dateFormat = "MM/dd/YYYY hh:mm:ss a"
             if let date = self.tx?.date {
                 self.dateLabel.text = dateFormatter.string(from: date)
             } else {

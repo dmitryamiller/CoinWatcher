@@ -12,7 +12,7 @@ import PromiseKit
 import SVPullToRefresh
 
 class CoinTransactionsViewController: UITableViewController {
-    private static let timeTransactionsValid: TimeInterval = 10
+    private static let timeTransactionsValid: TimeInterval = 30
     
     var wallet: Wallet?
     
@@ -38,13 +38,11 @@ class CoinTransactionsViewController: UITableViewController {
                 return
             }
             
-            NetworkIndicatorManager.instance.show()
             self?.fetchTransactions().always {
                 let realm = try! Realm()
                 realm.beginWrite()
                 wallet.lastTxSync = Date()
                 try? realm.commitWrite()
-                NetworkIndicatorManager.instance.hide()
                 self?.tableView.pullToRefreshView.stopAnimating()
             }
         }
@@ -96,13 +94,13 @@ class CoinTransactionsViewController: UITableViewController {
     private func fetchTransactions() -> Promise<Void> {
         guard let wallet = self.wallet,
               let coinType = self.wallet?.coinType
-        else { return Promise<Void>(error: FetchError.unknown) }
+        else { return Promise<Void>(error: CoinWatcherError.unknown) }
         
         switch coinType {
             case .bitcoin:
                 return BitcoinManager.instance.fetchTransactions(for: wallet.address)
             case .etherium:
-                return Promise<Void>(error: FetchError.unsupported)
+                return EtheriumManager.instance.fetchTransactions(for: wallet.address)
         }
     }
 }
@@ -113,10 +111,5 @@ extension CoinTransactionsViewController {
     }
 }
 
-extension CoinTransactionsViewController {
-    enum FetchError : Error {
-        case unknown
-        case unsupported
-    }
-}
+
 

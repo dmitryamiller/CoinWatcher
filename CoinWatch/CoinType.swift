@@ -12,7 +12,7 @@ enum CoinType: String {
     case bitcoin = "BTC"
     case etherium = "ETH"
     
-    static let all: [CoinType] = [.bitcoin]
+    static let all: [CoinType] = [.bitcoin, .etherium]
     
     var name: String {
         switch self {
@@ -71,6 +71,10 @@ extension CoinType {
 
 extension CoinType {
     fileprivate func validateEtherium(address: String) -> Bool {
-        return false
+        if address.characters.count != 40 {
+            return false
+        }
+        
+        return address.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil
     }
 }
