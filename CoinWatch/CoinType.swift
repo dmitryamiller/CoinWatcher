@@ -61,7 +61,7 @@ extension CoinType {
             return false
         }
         
-        if address.characters.first != "1" {
+        if address.characters.first != "1" && address.characters.first != "3" {
             return false
         }
         
