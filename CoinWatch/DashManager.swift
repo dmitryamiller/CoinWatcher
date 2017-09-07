@@ -15,6 +15,28 @@ class DashManager: NSObject {
     
     private static let balanceAmountDivider: Double = 100000000
     
+    func updateWalletBalances() -> Promise<Void> {
+        let wallets = Wallet.fetchWith(coinTypeId: CoinType.dash.rawValue)
+        
+        if wallets.count == 0 {
+            return Promise()
+        }
+        
+        return self.fetchBalances(for: wallets.map { $0.address } )
+            .then { balances -> Void in
+                
+                let realm = try! Realm()
+                realm.beginWrite()
+                for w in wallets {
+                    if let balance = balances[w.address] {
+                        w.nativeBalance = balance
+                        w.lastBalanceSync = Date()
+                    }
+                }
+                try? realm.commitWrite()
+        }
+    }
+    
     func fetchBalances(for addresses: [String]) -> Promise<[String : Double]> {
         if addresses.count == 0 {
             return Promise(value: [String : Double]())
@@ -86,26 +108,55 @@ class DashManager: NSObject {
                             }
                         }()
                         
-                        for node in transactions {
+                        var transactionNodeLookup = [String : [String : Any]]()
+                        
+                        for txJson in transactions {
                             guard let txHash = txJson["hash"] as? String,
-                                let amount = txJson["total"] as? Double,
-                                let input   = txJson["tx_input_n"] as? Int,
-                                let dateConfirmed = txJson["confirmed"] as? String,
-                                let balance = txJson["ref_balance"] as? Double
-                                else { continue }
+                                let amount = txJson["value"] as? Double,
+                                let dateConfirmed = txJson["confirmed"] as? String
+                            else { continue }
                             
-                            if CoinTransaction.transaction(with: txHash, wallet: wallet) != nil {
-                                continue
+                            var txNode: [String : Any] = {
+                                if let nd = transactionNodeLookup[txHash] {
+                                    return nd
+                                } else {
+                                    var newNode = [String : Any]()
+                                    newNode["hash"] = txHash
+                                    if let spent = txJson["spent"] as? Bool {
+                                        newNode["spent"] = spent
+                                    }
+                                    
+                                    newNode["confirmed"] = dateConfirmed
+                                    newNode["value"] = Double(0)
+                                    transactionNodeLookup[txHash] = newNode
+                                    
+                                    return newNode
+                                }
+                            }()
+                            
+                            if let prevAmount = txNode["value"] as? Double {
+                                txNode["value"] = prevAmount + amount
+                            }
+                        }
+                        
+                        for (txHash, txJson) in transactionNodeLookup {
+                            
+                            let tx: CoinTransaction = {
+                                if let existingTx = CoinTransaction.transaction(with: txHash, wallet: wallet) {
+                                    return existingTx
+                                } else {
+                                    let newTx = CoinTransaction()
+                                    newTx.wallet = wallet
+                                    realm.add(newTx)
+                                    return newTx
+                                }
+                            }()
+                            
+                            if let dateStr = txJson["confirmed"] as? String {
+                                tx.date = DashManager.dateFormatter.date(from: dateStr)
                             }
                             
-                            let tx = CoinTransaction()
-                            
-                            tx.wallet = wallet
-                            tx.txHash = txHash
-                            tx.date = EtheriumManager.dateFormatter.date(from: dateConfirmed)
-                            tx.nativeAmount = (input == 0 ? Double(-1) : Double(1)) * amount / EtheriumManager.divider
-                            tx.nativeBalance = balance / EtheriumManager.divider
-                            realm.add(tx)
+                            tx.nativeAmount = txJson["value"] as? Double ?? -1
                         }
                         
                         try? realm.commitWrite()
@@ -125,4 +176,10 @@ class DashManager: NSObject {
             
         }
     }
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss'Z'"
+        return formatter
+    }()
 }
