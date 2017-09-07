@@ -41,6 +41,25 @@ enum CoinType: String {
         }
     }
     
+    func normalize(address: String) throws -> String {
+        if !self.validate(address: address) {
+            throw CoinTypeError.invalidAddress
+        }
+        switch self {
+            case .bitcoin:
+                return address
+            case .dash:
+                return address
+            case .etherium:
+                if address.hasPrefix("0x") {
+                    let index = address.index(address.startIndex, offsetBy: 2)
+                    return address.substring(from: index).lowercased()
+                } else {
+                    return address.lowercased()
+                }
+        }
+    }
+    
     static func coinType(for qrCodeUrl: URL) -> CoinType? {
         guard let scheme = qrCodeUrl.standardized.scheme else { return nil }
         
@@ -75,11 +94,16 @@ extension CoinType {
 
 extension CoinType {
     fileprivate func validateEtherium(address: String) -> Bool {
-        if address.characters.count != 40 {
+        var normalizedAddress = address
+        if address.hasPrefix("0x") {
+            let index = address.index(address.startIndex, offsetBy: 2)
+            normalizedAddress = address.substring(from: index)
+        }
+        if normalizedAddress.characters.count != 40 {
             return false
         }
         
-        return address.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil
+        return normalizedAddress.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil
     }
 }
 
@@ -88,3 +112,10 @@ extension CoinType {
         return true
     }
 }
+
+extension CoinType {
+    enum CoinTypeError : Error {
+        case invalidAddress
+    }
+}
+

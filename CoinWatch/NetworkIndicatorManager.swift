@@ -14,19 +14,19 @@ class NetworkIndicatorManager: NSObject {
     private var counter: UInt = 0
     
     func show() {
-        DispatchQueue.main.async { [weak self] in
-            let counter = self?.counter ?? 0
-            self?.counter = counter + 1
-            self?.synchWithCounter()
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            let counter = self?.counter ?? 0
+//            self?.counter = counter + 1
+//            self?.synchWithCounter()
+//        }
     }
     
     func hide() {
-        DispatchQueue.main.async { [weak self] in
-            let counter = self?.counter ?? 0
-            self?.counter = max(counter - 1, 0)
-            self?.synchWithCounter()
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            let counter = self?.counter ?? 0
+//            self?.counter = max(counter - 1, 0)
+//            self?.synchWithCounter()
+//        }
     }
     
     private func synchWithCounter() {

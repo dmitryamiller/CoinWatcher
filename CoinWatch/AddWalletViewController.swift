@@ -78,6 +78,8 @@ class AddWalletViewController: UIViewController {
             return
         }
 
+        let address = try! coinType.normalize(address: address)
+        
         BusyIndicatorManager.instance.show()
         self.fetchNativeBalance(for: address, coinType)
         .then { [weak self] nativeBalance in
