@@ -87,7 +87,7 @@ class DashManager: NSObject {
     
     func fetchTransactions(for address: String) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
-            let urlStr = "https://api.blockcypher.com/v1/dash/main/addrs/\(address)/full)"
+            let urlStr = "https://api.blockcypher.com/v1/dash/main/addrs/\(address)"
             let url = URL(string: urlStr)!
             let request = URLRequest(url: url)
             let session = URLSession.shared
@@ -101,62 +101,56 @@ class DashManager: NSObject {
                         guard let wallet = Wallet.fetchWith(address: address, coinTypeId: CoinType.dash.rawValue) else { fulfill(); return }
                         
                         let transactions: Array<[String : Any]> = {
-                            if let txs = json["txs"] as? Array<[String : Any]>{
+                            if let txs = json["txrefs"] as? Array<[String : Any]>{
                                 return txs
                             } else {
                                 return Array<[String : Any]>()
                             }
                         }()
                         
-                        var transactionNodeLookup = [String : [String : Any]]()
+                        var transactionLookup = [String : CoinTransaction]()
                         
                         for txJson in transactions {
-                            guard let txHash = txJson["hash"] as? String,
+                            guard let txHash = txJson["tx_hash"] as? String,
                                 let amount = txJson["value"] as? Double,
                                 let dateConfirmed = txJson["confirmed"] as? String
                             else { continue }
                             
-                            var txNode: [String : Any] = {
-                                if let nd = transactionNodeLookup[txHash] {
-                                    return nd
+                            
+                            let tx: CoinTransaction = {
+                                if let processedTx = transactionLookup[txHash] {
+                                    return processedTx
                                 } else {
-                                    var newNode = [String : Any]()
-                                    newNode["hash"] = txHash
-                                    if let spent = txJson["spent"] as? Bool {
-                                        newNode["spent"] = spent
-                                    }
+                                    let tx = CoinTransaction()
+                                    tx.txHash = txHash
                                     
-                                    newNode["confirmed"] = dateConfirmed
-                                    newNode["value"] = Double(0)
-                                    transactionNodeLookup[txHash] = newNode
+                                    tx.date = DashManager.date(from: dateConfirmed)
                                     
-                                    return newNode
+                                    transactionLookup[txHash] = tx
+                                    return tx
                                 }
                             }()
                             
-                            if let prevAmount = txNode["value"] as? Double {
-                                txNode["value"] = prevAmount + amount
-                            }
+                            let multiplier: Double = txJson["spent"] as? Bool ?? false ? 1 : -1
+                            tx.nativeAmount += multiplier * amount                            
                         }
                         
-                        for (txHash, txJson) in transactionNodeLookup {
+                        for (txHash, tempTx) in transactionLookup {
                             
                             let tx: CoinTransaction = {
                                 if let existingTx = CoinTransaction.transaction(with: txHash, wallet: wallet) {
                                     return existingTx
                                 } else {
                                     let newTx = CoinTransaction()
+                                    newTx.txHash = txHash
                                     newTx.wallet = wallet
                                     realm.add(newTx)
                                     return newTx
                                 }
                             }()
                             
-                            if let dateStr = txJson["confirmed"] as? String {
-                                tx.date = DashManager.dateFormatter.date(from: dateStr)
-                            }
-                            
-                            tx.nativeAmount = txJson["value"] as? Double ?? -1
+                            tx.date = tempTx.date
+                            tx.nativeAmount = tempTx.nativeAmount / DashManager.balanceAmountDivider
                         }
                         
                         try? realm.commitWrite()
@@ -177,9 +171,44 @@ class DashManager: NSObject {
         }
     }
     
-    static let dateFormatter: DateFormatter = {
+    
+    static func date(from strDate: String) -> Date? {
+        for dateFormatter in [DashManager.dateFormatter_Long1, DashManager.dateFormatter_Long2, DashManager.dateFormatter_Long3, DashManager.dateFormatter_Short] {
+            if let date = dateFormatter.date(from: strDate) {
+                return date
+            }
+        }
+        
+        return nil
+    }
+    
+    static let dateFormatter_Long1: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.isLenient = true
+        formatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.S'Z'"
+        return formatter
+    }()
+    
+    static let dateFormatter_Long2: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.isLenient = true
+        formatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SS'Z'"
+        return formatter
+    }()
+    
+    static let dateFormatter_Long3: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.isLenient = true
+        formatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSS'Z'"
+        return formatter
+    }()
+    
+    static let dateFormatter_Short: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.isLenient = true
         formatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss'Z'"
         return formatter
     }()
+    
 }
+

@@ -12,7 +12,7 @@ import PromiseKit
 import SVPullToRefresh
 
 class CoinTransactionsViewController: UITableViewController {
-    private static let timeTransactionsValid: TimeInterval = 30
+    private static let timeTransactionsValid: TimeInterval = 5
     
     var wallet: Wallet?
     
@@ -38,11 +38,13 @@ class CoinTransactionsViewController: UITableViewController {
                 return
             }
             
-            self?.fetchTransactions().always {
+            self?.fetchTransactions().then {
                 let realm = try! Realm()
                 realm.beginWrite()
                 wallet.lastTxSync = Date()
                 try? realm.commitWrite()
+                return AnyPromise(Promise<Void>())
+            }.always {
                 self?.tableView.pullToRefreshView.stopAnimating()
             }
         }

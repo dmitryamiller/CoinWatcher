@@ -13,7 +13,7 @@ enum CoinType: String {
     case etherium = "ETH"
     case dash = "DSH"
     
-    static let all: [CoinType] = [.bitcoin, .etherium]
+    static let all: [CoinType] = [.bitcoin, .etherium, .dash]
     
     var name: String {
         switch self {
