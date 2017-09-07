@@ -11,7 +11,7 @@ import UIKit
 enum CoinType: String {
     case bitcoin = "BTC"
     case etherium = "ETH"
-    case dash = "DSH"
+    case dash = "DASH"
     
     static let all: [CoinType] = [.bitcoin, .etherium, .dash]
     
