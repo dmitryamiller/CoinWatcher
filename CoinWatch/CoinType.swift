@@ -11,13 +11,15 @@ import UIKit
 enum CoinType: String {
     case bitcoin = "BTC"
     case etherium = "ETH"
+    case dash = "DSH"
     
-    static let all: [CoinType] = [.bitcoin, .etherium]
+    static let all: [CoinType] = [.bitcoin, .etherium, .dash]
     
     var name: String {
         switch self {
             case .bitcoin: return NSLocalizedString("Bitcoin", comment: "Bitcoin")
             case .etherium: return NSLocalizedString("Etherium", comment: "Etherium")
+            case .dash: return NSLocalizedString("Dash", comment: "Dash")
         }
     }
     
@@ -26,14 +28,16 @@ enum CoinType: String {
             switch self {
                 case .bitcoin: return "bitcoin"
                 case .etherium: return "etherium"
+                case .dash: return "dash"
             }
         }
     }
     
     func validate(address: String) -> Bool {
         switch self {
-            case .bitcoin: return self.validateBitcoin(address:address)
-            case .etherium: return self.validateEtherium(address:address)
+            case .bitcoin: return self.validateBitcoin(address: address)
+            case .etherium: return self.validateEtherium(address: address)
+            case .dash: return self.validateDash(address: address)
         }
     }
     
@@ -76,5 +80,11 @@ extension CoinType {
         }
         
         return address.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) == nil
+    }
+}
+
+extension CoinType {
+    fileprivate func validateDash(address: String) -> Bool {
+        return true
     }
 }

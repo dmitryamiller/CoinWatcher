@@ -179,10 +179,12 @@ class WalletsViewController: UITableViewController {
                 .filter("%K <= %@", #keyPath(Wallet.lastBalanceSync), timeUpdateAvailable)
                 .map { $0.coinType }) {
                     switch coinType {
-                        case .bitcoin:
-                            coinTypePromises.append(BitcoinManager.instance.fetchWalletBalances())
+                        case .bitcoin:                        
+                            coinTypePromises.append(BitcoinManager.instance.updateWalletBalances())
                         case .etherium:
-                            break
+                            coinTypePromises.append(EtheriumManager.instance.updateWalletBalances())
+                        case .dash:
+                            coinTypePromises.append(DashManager.instance.updateWalletBalances())
                     }
         }
         

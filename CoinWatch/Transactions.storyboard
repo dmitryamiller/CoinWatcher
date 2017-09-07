@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12121"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,25 +27,25 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? Aug 30, 2017 9:18 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5c-8f-AQp">
-                                            <rect key="frame" x="15" y="10" width="136.5" height="14.5"/>
+                                            <rect key="frame" x="15" y="13.5" width="136.5" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27657657657657657" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToT-n9-H94">
-                                            <rect key="frame" x="15" y="28" width="123" height="14.5"/>
+                                            <rect key="frame" x="15" y="31.5" width="123" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.41960784309999999" green="0.41960784309999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="?? $1,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWp-mV-bGn">
-                                            <rect key="frame" x="241" y="6.5" width="119" height="18"/>
+                                            <rect key="frame" x="241" y="10" width="119" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="1.000 BTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfb-So-rEB">
-                                            <rect key="frame" x="290.5" y="24.5" width="69.5" height="18"/>
+                                            <rect key="frame" x="290.5" y="28" width="69.5" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                             <color key="textColor" red="0.41960784309999999" green="0.41960784309999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -60,10 +60,10 @@
                                         <constraint firstItem="ToT-n9-H94" firstAttribute="baseline" secondItem="bfb-So-rEB" secondAttribute="baseline" id="JYV-ms-afO"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="bfb-So-rEB" secondAttribute="bottom" constant="10" id="KBv-7f-SdB"/>
                                         <constraint firstAttribute="trailing" secondItem="dWp-mV-bGn" secondAttribute="trailing" constant="15" id="LKI-6W-58d"/>
+                                        <constraint firstItem="dWp-mV-bGn" firstAttribute="top" secondItem="JLL-fi-5hJ" secondAttribute="top" constant="10" id="PSu-cv-igw"/>
                                         <constraint firstItem="B5c-8f-AQp" firstAttribute="leading" secondItem="JLL-fi-5hJ" secondAttribute="leading" constant="15" id="SWy-G1-yND"/>
                                         <constraint firstItem="dWp-mV-bGn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="B5c-8f-AQp" secondAttribute="trailing" constant="5" id="VZW-vY-U5X"/>
                                         <constraint firstItem="bfb-So-rEB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ToT-n9-H94" secondAttribute="trailing" constant="10" id="Y17-O1-BKT"/>
-                                        <constraint firstItem="B5c-8f-AQp" firstAttribute="top" secondItem="JLL-fi-5hJ" secondAttribute="top" constant="10" id="ctl-zO-iqC"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

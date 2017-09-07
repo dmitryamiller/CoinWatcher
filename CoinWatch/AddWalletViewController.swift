@@ -106,23 +106,33 @@ class AddWalletViewController: UIViewController {
     
     private func fetchNativeBalance(for address: String, _ coinType: CoinType) -> Promise<Double> {
         switch coinType {
-        case .bitcoin:
-            return BitcoinManager.instance.fetchBalances(for: [address]).then { balances in
-                if let balance = balances[address] {
-                    return Promise<Double>(value: balance)
-                } else {
-                    return Promise<Double>(error: CoinBalanceError.notFound)
+            case .bitcoin:
+                return BitcoinManager.instance.fetchBalances(for: [address]).then { balances in
+                    if let balance = balances[address] {
+                        return Promise<Double>(value: balance)
+                    } else {
+                        return Promise<Double>(error: CoinBalanceError.notFound)
+                    }
                 }
-            }
-        case .etherium:
-            return EtheriumManager.instance.fetchBalances(for: [address]).then { balances in
-                if let balance = balances[address] {
-                    return Promise<Double>(value: balance)
-                } else {
-                    return Promise<Double>(error: CoinBalanceError.notFound)
+            case .etherium:
+                return EtheriumManager.instance.fetchBalances(for: [address]).then { balances in
+                    if let balance = balances[address] {
+                        return Promise<Double>(value: balance)
+                    } else {
+                        return Promise<Double>(error: CoinBalanceError.notFound)
+                    }
                 }
-            }
+            case .dash:
+                return DashManager.instance.fetchBalances(for: [address]).then { balances in
+                    if let balance = balances[address] {
+                        return Promise(value: balance)
+                    } else {
+                        return Promise(error: CoinBalanceError.notFound)
+                    }
+                }
         }
+        
+        
     }
 }
 

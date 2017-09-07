@@ -14,6 +14,28 @@ class EtheriumManager: NSObject {
     static let instance = EtheriumManager()
     static let divider: Double = 1000000000000000000
     
+    func updateWalletBalances() -> Promise<Void> {
+        let wallets = Wallet.fetchWith(coinTypeId: CoinType.etherium.rawValue)
+        
+        if wallets.count == 0 {
+            return Promise()
+        }
+        
+        return self.fetchBalances(for: wallets.map { $0.address } )
+            .then { balances -> Void in
+                
+                let realm = try! Realm()
+                realm.beginWrite()
+                for w in wallets {
+                    if let balance = balances[w.address] {
+                        w.nativeBalance = balance
+                        w.lastBalanceSync = Date()
+                    }
+                }
+                try? realm.commitWrite()
+        }
+    }
+    
     func fetchBalances(for addresses: [String]) -> Promise<[String : Double]> {
         if addresses.count == 0 {
             return Promise(value: [String : Double]())

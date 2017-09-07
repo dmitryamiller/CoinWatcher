@@ -42,7 +42,7 @@ class BitcoinManager: NSObject {
         
     }
     
-    func fetchWalletBalances() -> Promise<Void> {
+    func updateWalletBalances() -> Promise<Void> {
         let wallets = Wallet.fetchWith(coinTypeId: CoinType.bitcoin.rawValue)
         
         if wallets.count == 0 {
