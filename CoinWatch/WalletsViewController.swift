@@ -181,6 +181,8 @@ class WalletsViewController: UITableViewController {
                     switch coinType {
                         case .bitcoin:                        
                             coinTypePromises.append(BitcoinManager.instance.updateWalletBalances())
+                        case .bitcoinCash:
+                            coinTypePromises.append(BitcoinCashManager.instance.updateWalletBalances())
                         case .etherium:
                             coinTypePromises.append(EtheriumManager.instance.updateWalletBalances())
                         case .dash:

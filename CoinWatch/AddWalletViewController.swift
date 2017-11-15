@@ -116,6 +116,14 @@ class AddWalletViewController: UIViewController {
                         return Promise<Double>(error: CoinBalanceError.notFound)
                     }
                 }
+            case .bitcoinCash:
+                return BitcoinCashManager.instance.fetchBalances(for: [address]).then { balances in
+                    if let balance = balances[address] {
+                        return Promise<Double>(value: balance)
+                    } else {
+                        return Promise<Double>(error: CoinBalanceError.notFound)
+                    }
+                }
             case .etherium:
                 return EtheriumManager.instance.fetchBalances(for: [address]).then { balances in
                     if let balance = balances[address] {

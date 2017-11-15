@@ -12,12 +12,14 @@ enum CoinType: String {
     case bitcoin = "BTC"
     case etherium = "ETH"
     case dash = "DASH"
+    case bitcoinCash = "BCC"
     
-    static let all: [CoinType] = [.bitcoin, .etherium, .dash]
+    static let all: [CoinType] = [.bitcoin, .bitcoinCash, .etherium, .dash]
     
     var name: String {
         switch self {
             case .bitcoin: return NSLocalizedString("Bitcoin", comment: "Bitcoin")
+            case .bitcoinCash: return NSLocalizedString("Bitcoin Cash", comment: "Bitcoin Cash")
             case .etherium: return NSLocalizedString("Etherium", comment: "Etherium")
             case .dash: return NSLocalizedString("Dash", comment: "Dash")
         }
@@ -27,6 +29,7 @@ enum CoinType: String {
         get {
             switch self {
                 case .bitcoin: return "bitcoin"
+                case .bitcoinCash: return "bitcoincash"
                 case .etherium: return "etherium"
                 case .dash: return "dash"
             }
@@ -36,6 +39,7 @@ enum CoinType: String {
     func validate(address: String) -> Bool {
         switch self {
             case .bitcoin: return self.validateBitcoin(address: address)
+            case .bitcoinCash: return self.validateBitcoinCash(address:address)
             case .etherium: return self.validateEtherium(address: address)
             case .dash: return self.validateDash(address: address)
         }
@@ -47,6 +51,8 @@ enum CoinType: String {
         }
         switch self {
             case .bitcoin:
+                return address
+            case .bitcoinCash:
                 return address
             case .dash:
                 return address
@@ -75,20 +81,31 @@ enum CoinType: String {
 
 extension CoinType {
     fileprivate func validateBitcoin(address: String) -> Bool {
-        if address.characters.count != 34 {
+        if address.count != 34 {
             // could be xpub
             if address.hasPrefix("xpub") {
-                return address.characters.count == 111
+                return address.count == 111
             }
             
             return false
         }
         
-        if address.characters.first != "1" && address.characters.first != "3" {
+        if address.first != "1" && address.first != "3" {
             return false
         }
         
         return true
+    }
+}
+
+extension CoinType {
+    fileprivate func validateBitcoinCash(address: String) -> Bool {
+        let isValid = self.validateBitcoin(address: address)
+        if isValid {
+            return true
+        }
+        
+        return address.count == 40
     }
 }
 
@@ -99,7 +116,7 @@ extension CoinType {
             let index = address.index(address.startIndex, offsetBy: 2)
             normalizedAddress = address.substring(from: index)
         }
-        if normalizedAddress.characters.count != 40 {
+        if normalizedAddress.count != 40 {
             return false
         }
         
