@@ -27,6 +27,7 @@ class WalletTotalTableCell: UITableViewCell {
                 let formatter = NumberFormatter()
                 let userPreferences = UserPreferences.current()
                 formatter.positiveFormat = userPreferences.currency.symbol + "#,###.00"
+                formatter.minimumIntegerDigits = 1
                 formatter.minimumFractionDigits = 2
                 formatter.maximumFractionDigits = 2
                 self?.amountLabel.text = formatter.string(from: amount as NSNumber)

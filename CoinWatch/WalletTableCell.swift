@@ -65,9 +65,9 @@ class WalletTableCell: UITableViewCell {
         }
         
         let formatter = NumberFormatter()
-        formatter.minimumIntegerDigits = 1
         formatter.positiveFormat = "\(currency.symbol)#,###.##"
         formatter.minimumFractionDigits = 2
+        formatter.minimumIntegerDigits = 1
         return formatter.string(from: balance * price as NSNumber)
     }
     
