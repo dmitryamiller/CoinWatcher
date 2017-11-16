@@ -140,6 +140,14 @@ class AddWalletViewController: UIViewController {
                         return Promise(error: CoinBalanceError.notFound)
                     }
                 }
+            case .litecoin:
+                return LitecoinManager.instance.fetchBalances(for: [address]).then { balances in
+                    if let balance = balances[address] {
+                        return Promise<Double>(value: balance)
+                    } else {
+                        return Promise<Double>(error: CoinBalanceError.notFound)
+                    }
+            }
         }
         
         

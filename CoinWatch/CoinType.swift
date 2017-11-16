@@ -13,8 +13,9 @@ enum CoinType: String {
     case etherium = "ETH"
     case dash = "DASH"
     case bitcoinCash = "BCH"
+    case litecoin = "LTC"
     
-    static let all: [CoinType] = [.bitcoin, .bitcoinCash, .etherium, .dash]
+    static let all: [CoinType] = [.bitcoin, .bitcoinCash, .etherium, .dash, .litecoin]
     
     var name: String {
         switch self {
@@ -22,6 +23,7 @@ enum CoinType: String {
             case .bitcoinCash: return NSLocalizedString("Bitcoin Cash", comment: "Bitcoin Cash")
             case .etherium: return NSLocalizedString("Etherium", comment: "Etherium")
             case .dash: return NSLocalizedString("Dash", comment: "Dash")
+            case .litecoin: return NSLocalizedString("Litecoin", comment: "Litecoin")
         }
     }
     
@@ -32,6 +34,7 @@ enum CoinType: String {
                 case .bitcoinCash: return "bitcoincash"
                 case .etherium: return "etherium"
                 case .dash: return "dash"
+                case .litecoin: return "litecoin"
             }
         }
     }
@@ -42,6 +45,7 @@ enum CoinType: String {
             case .bitcoinCash: return self.validateBitcoinCash(address:address)
             case .etherium: return self.validateEtherium(address: address)
             case .dash: return self.validateDash(address: address)
+            case .litecoin: return self.validateLitecoin(address: address)
         }
     }
     
@@ -55,7 +59,10 @@ enum CoinType: String {
             case .bitcoinCash:
                 return address
             case .dash:
+                return address            
+            case .litecoin:
                 return address
+            
             case .etherium:
                 if address.hasPrefix("0x") {
                     let index = address.index(address.startIndex, offsetBy: 2)
@@ -106,6 +113,17 @@ extension CoinType {
         }
         
         return address.count == 40
+    }
+}
+
+extension CoinType {
+    fileprivate func validateLitecoin(address: String) -> Bool {
+        if address.count != 34 {
+            return false
+        }
+        
+        guard let firstCharacter = address.first else { return false }
+        return firstCharacter == "L"
     }
 }
 

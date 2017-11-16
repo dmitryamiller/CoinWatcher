@@ -107,6 +107,8 @@ class CoinTransactionsViewController: UITableViewController {
                 return EtheriumManager.instance.fetchTransactions(for: wallet.address)
             case .dash:
                 return DashManager.instance.fetchTransactions(for: wallet.address)
+            case .litecoin:
+                return LitecoinManager.instance.fetchTransactions(for: wallet.address)
         }
     }
 }
