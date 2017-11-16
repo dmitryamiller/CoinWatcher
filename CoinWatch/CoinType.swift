@@ -12,7 +12,7 @@ enum CoinType: String {
     case bitcoin = "BTC"
     case etherium = "ETH"
     case dash = "DASH"
-    case bitcoinCash = "BCC"
+    case bitcoinCash = "BCH"
     
     static let all: [CoinType] = [.bitcoin, .bitcoinCash, .etherium, .dash]
     
