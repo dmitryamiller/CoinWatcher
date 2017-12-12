@@ -56,7 +56,7 @@ class WalletsViewController: UITableViewController {
     
     // MARK: - TableViewDataSource and TableViewDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,7 +64,6 @@ class WalletsViewController: UITableViewController {
         
         switch tableSection {
             case .total: return 1
-            case .currency: return 1
             case .wallets: return max(self.wallets?.count ?? 0, 1)
         }
     }
@@ -78,10 +77,6 @@ class WalletsViewController: UITableViewController {
                     cell.model = self.totalModel
                     return cell;
             
-            case .currency:
-                    let cell = tableView.dequeReusableCell(withType: CurrentCurrencyTableCell.self)
-                    cell.userPreferences = UserPreferences.current()
-                    return cell
             case .wallets:
                     if self.wallets?.count ?? 0 > 0 {
                         guard let wallets = self.wallets else { fatalError() }
@@ -100,7 +95,6 @@ class WalletsViewController: UITableViewController {
         guard let section = Section(rawValue: indexPath.section) else { return false }
         switch section {
             case .total: return false
-            case .currency: return false
             case .wallets: return self.wallets?.count ?? 0 > 0
         }
     }
@@ -109,7 +103,7 @@ class WalletsViewController: UITableViewController {
         guard let section = Section(rawValue: indexPath.section) else { return  }
         
         switch section {
-            case .total, .currency: return
+            case .total: return
             case .wallets:
                 guard let wallets = self.wallets else { return }
                 switch editingStyle {
@@ -127,8 +121,6 @@ class WalletsViewController: UITableViewController {
         switch Section(rawValue: section)! {
             case .total:
                 return "Total"
-            case .currency:
-                return "Currency"
             case .wallets:
                 return "Wallets"
         }
@@ -217,7 +209,6 @@ class WalletsViewController: UITableViewController {
 extension WalletsViewController {
     enum Section : Int {
         case total = 0
-        case currency = 1
-        case wallets = 2
+        case wallets = 1
     }
 }

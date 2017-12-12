@@ -1,21 +1,23 @@
 //
-//  CurrentCurrencyTableCell.swift
+//  CurrencyTableViewCell.swift
 //  CoinWatch
 //
-//  Created by Dmitry Miller on 8/25/17.
+//  Created by Dmitry Miller on 12/12/17.
 //  Copyright © 2017 Dmitry Miller. All rights reserved.
 //
 
 import UIKit
 
-class CurrentCurrencyTableCell: UITableViewCell {
+class CurrencyTableViewCell: UITableViewCell {
+    @IBOutlet weak var currencyLabel: UILabel!
+    
     var userPreferences: UserPreferences? {
         didSet {
             self.unwatchAll()
             
             guard let userPreferences = self.userPreferences else { return }
             self.watch(object: userPreferences, propertyName: #keyPath(UserPreferences.currencyType)) { [weak self] in
-                self?.textLabel?.text = FormatUtils.format(currency: userPreferences.currency)                    
+                self?.currencyLabel?.text = userPreferences.currency.rawValue + " (" + userPreferences.currency.symbol + ")"
             }
         }
     }
