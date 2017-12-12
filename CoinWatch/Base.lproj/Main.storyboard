@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XqM-Zf-rSD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XqM-Zf-rSD">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,19 +15,19 @@
             <objects>
                 <tableViewController id="rA0-xq-f8m" customClass="WalletsViewController" customModule="CoinWatch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Mew-Dv-JwL">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CurrentCurrencyTableCell" textLabel="QVo-TW-B0v" style="IBUITableViewCellStyleDefault" id="RJk-AL-bFo" customClass="CurrentCurrencyTableCell" customModule="CoinWatch" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="55" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RJk-AL-bFo" id="Eib-yF-iCe">
-                                    <rect key="frame" x="0.0" y="0.0" width="381" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="?? Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QVo-TW-B0v">
-                                            <rect key="frame" x="15" y="0.0" width="364" height="43.666666666666664"/>
+                                            <rect key="frame" x="20" y="0.0" width="356" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -40,14 +40,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ZeroData" textLabel="jka-4u-Asa" style="IBUITableViewCellStyleDefault" id="wQh-1A-bkA">
-                                <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="99" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wQh-1A-bkA" id="0Pq-Fz-FzB">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="?? You have no wallets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jka-4u-Asa">
-                                            <rect key="frame" x="15" y="0.0" width="384" height="43.666666666666664"/>
+                                            <rect key="frame" x="20" y="0.0" width="374" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.41960784309999999" green="0.41960784309999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -56,33 +56,33 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WalletTableCell" rowHeight="65" id="oIU-QG-Cn3" customClass="WalletTableCell" customModule="CoinWatch" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="143.5" width="414" height="65"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WalletTableCell" rowHeight="67" id="oIU-QG-Cn3" customClass="WalletTableCell" customModule="CoinWatch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="143" width="414" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oIU-QG-Cn3" id="qzx-G1-xaY">
-                                    <rect key="frame" x="0.0" y="0.0" width="381" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? Bitcoin Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-n9-bpu">
-                                            <rect key="frame" x="13" y="13" width="122.66666666666666" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="?? Bitcoin Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-n9-bpu">
+                                            <rect key="frame" x="25.000000000000007" y="16" width="122.66666666666669" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? Bitcoin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6j-y6-Lac">
-                                            <rect key="frame" x="13" y="34" width="70" height="18"/>
+                                            <rect key="frame" x="25" y="37" width="70" height="14"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                             <color key="textColor" red="0.41960784309999999" green="0.41960784309999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="??1,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Sg7-BA-lha">
-                                            <rect key="frame" x="155.66666666666663" y="13" width="212.33333333333337" height="21"/>
+                                            <rect key="frame" x="280" y="16" width="83" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? 1.000 BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Umm-oQ-3pq">
-                                            <rect key="frame" x="280" y="34" width="88" height="18"/>
+                                            <rect key="frame" x="275" y="33" width="88" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                             <color key="textColor" red="0.41960784309999999" green="0.41960784309999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -94,7 +94,7 @@
                                         <constraint firstItem="Umm-oQ-3pq" firstAttribute="baseline" secondItem="b6j-y6-Lac" secondAttribute="baseline" id="8aI-7u-Efa"/>
                                         <constraint firstItem="b6j-y6-Lac" firstAttribute="top" secondItem="5pS-n9-bpu" secondAttribute="bottom" id="E1l-9t-WGv"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="b6j-y6-Lac" secondAttribute="bottom" constant="5" id="I0B-g9-SHX"/>
-                                        <constraint firstItem="Sg7-BA-lha" firstAttribute="leading" secondItem="5pS-n9-bpu" secondAttribute="trailing" constant="20" id="JOX-MI-QjV"/>
+                                        <constraint firstItem="Sg7-BA-lha" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5pS-n9-bpu" secondAttribute="trailing" constant="20" id="JOX-MI-QjV"/>
                                         <constraint firstItem="5pS-n9-bpu" firstAttribute="top" secondItem="qzx-G1-xaY" secondAttribute="topMargin" constant="5" id="R37-0e-yFS"/>
                                         <constraint firstItem="Umm-oQ-3pq" firstAttribute="trailing" secondItem="Sg7-BA-lha" secondAttribute="trailing" id="XJx-XN-6Yy"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Sg7-BA-lha" secondAttribute="trailing" constant="5" id="ftV-p2-17z"/>
@@ -110,14 +110,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletTotalTableCell" id="MFm-Tn-bST" customClass="WalletTotalTableCell" customModule="CoinWatch" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="208.5" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="210" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MFm-Tn-bST" id="KzQ-Cd-wzP">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? 10,000,000.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohd-fn-Wai">
-                                            <rect key="frame" x="15" y="10" width="384" height="23.666666666666664"/>
+                                            <rect key="frame" x="15" y="10.000000000000002" width="384" height="23.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -141,6 +141,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Wallets" id="Uqp-J8-5uD">
+                        <barButtonItem key="leftBarButtonItem" image="gear_icon" id="l2N-vh-ywf">
+                            <connections>
+                                <segue destination="CyV-R4-Ynj" kind="presentation" id="aH0-iw-d09"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Giv-eM-4yY">
                             <connections>
                                 <segue destination="N3O-fl-XRN" kind="presentation" id="98x-KX-0Pb"/>
@@ -157,7 +162,7 @@
             <objects>
                 <tableViewController id="nbp-KB-GRI" customClass="SelectCurrencyViewController" customModule="CoinWatch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="K8N-Ys-5UU">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -165,11 +170,11 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g7h-vG-aJl" id="CiY-io-6ya">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="?? Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2mM-Ot-PKL">
-                                            <rect key="frame" x="15" y="0.0" width="384" height="43.666666666666664"/>
+                                            <rect key="frame" x="20" y="0.0" width="374" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -196,7 +201,23 @@
                 <viewControllerPlaceholder storyboardName="AddWallet" id="N3O-fl-XRN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZE-fl-7dF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="923" y="562"/>
+            <point key="canvasLocation" x="1178" y="642"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3q6-qw-diz">
+            <objects>
+                <navigationController id="CyV-R4-Ynj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="36U-nP-xBc">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="eTI-qU-N3M" kind="relationship" relationship="rootViewController" id="jeF-dx-2GM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dwz-cq-fTP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="742" y="1188"/>
         </scene>
         <!--Transactions-->
         <scene sceneID="Uzv-lY-JRz">
@@ -206,12 +227,99 @@
             </objects>
             <point key="canvasLocation" x="1732" y="341"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="uL4-qN-eKi">
+            <objects>
+                <tableViewController id="eTI-qU-N3M" customClass="SettingsViewController" customModule="CoinWatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="hSq-AD-2cH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CurrencyTableViewCell" id="XgB-4o-k0t" customClass="CurrencyTableViewCell" customModule="CoinWatch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XgB-4o-k0t" id="9tw-Q8-IV0">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="?? Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Om-KN-axJ">
+                                            <rect key="frame" x="15" y="12" width="384" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="0Om-KN-axJ" firstAttribute="leading" secondItem="9tw-Q8-IV0" secondAttribute="leading" constant="15" id="5dE-8A-RPT"/>
+                                        <constraint firstAttribute="trailing" secondItem="0Om-KN-axJ" secondAttribute="trailing" constant="15" id="6GD-6B-C9W"/>
+                                        <constraint firstItem="0Om-KN-axJ" firstAttribute="centerY" secondItem="9tw-Q8-IV0" secondAttribute="centerY" id="ez1-Di-wgf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="currencyLabel" destination="0Om-KN-axJ" id="zrE-wY-u3G"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SelectCurrencyTableCell" rowHeight="250" id="TgE-uU-pJ0" customClass="SelectCurrencyTableCell" customModule="CoinWatch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="99" width="414" height="250"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TgE-uU-pJ0" id="UAd-nh-e5S">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="249"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="?? Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vd-xd-XOK">
+                                            <rect key="frame" x="15" y="10" width="384" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oxb-t4-BZi">
+                                            <rect key="frame" x="0.0" y="34" width="414" height="216"/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="TgE-uU-pJ0" id="HSd-o9-ydl"/>
+                                                <outlet property="delegate" destination="TgE-uU-pJ0" id="7cE-2O-5Jy"/>
+                                            </connections>
+                                        </pickerView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Oxb-t4-BZi" secondAttribute="trailing" id="9rP-bL-PBt"/>
+                                        <constraint firstAttribute="bottom" secondItem="Oxb-t4-BZi" secondAttribute="bottom" id="CB9-hX-Rqi"/>
+                                        <constraint firstItem="Oxb-t4-BZi" firstAttribute="leading" secondItem="UAd-nh-e5S" secondAttribute="leading" id="TFH-dh-CxV"/>
+                                        <constraint firstItem="2vd-xd-XOK" firstAttribute="leading" secondItem="UAd-nh-e5S" secondAttribute="leading" constant="15" id="Yq7-2B-fXF"/>
+                                        <constraint firstItem="2vd-xd-XOK" firstAttribute="top" secondItem="UAd-nh-e5S" secondAttribute="top" constant="10" id="e3C-Vo-aHw"/>
+                                        <constraint firstAttribute="trailing" secondItem="2vd-xd-XOK" secondAttribute="trailing" constant="15" id="fPW-Wo-onC"/>
+                                        <constraint firstItem="Oxb-t4-BZi" firstAttribute="top" secondItem="2vd-xd-XOK" secondAttribute="bottom" constant="3.3300000000000001" id="pZT-m0-aL7"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="currencyLabel" destination="2vd-xd-XOK" id="Zoj-Ty-T3k"/>
+                                    <outlet property="valuePickerView" destination="Oxb-t4-BZi" id="wTr-Rp-h9Q"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="eTI-qU-N3M" id="ow4-fF-giR"/>
+                            <outlet property="delegate" destination="eTI-qU-N3M" id="kiW-yq-00w"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="ykH-6Y-4ff">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="rns-hQ-Oza">
+                            <connections>
+                                <action selector="dismissSelf" destination="eTI-qU-N3M" id="nWM-vb-K9D"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n1c-0l-Y0I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1493" y="1188"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="pY3-XQ-XFh">
             <objects>
                 <navigationController id="XqM-Zf-rSD" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="cW9-8c-BNm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -223,4 +331,7 @@
             <point key="canvasLocation" x="-28" y="137"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gear_icon" width="30" height="30"/>
+    </resources>
 </document>
