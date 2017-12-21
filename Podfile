@@ -10,6 +10,7 @@ target 'CoinWatch' do
   pod "PromiseKit", "~> 4.0"
   pod "HockeySDK", :subspecs => ['AllFeaturesLib']
   pod "SVPullToRefresh"
+  pod "coinbase-official", :path => '~/Developer/Personal/coinbase-sdk'
 
   target 'CoinWatchTests' do
     inherit! :search_paths

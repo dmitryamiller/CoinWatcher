@@ -30,12 +30,7 @@ class WalletTableCell: UITableViewCell {
                 guard false == (self?.wallet?.isInvalidated ?? true) else { return }
                 self?.nameLabel.text = self?.wallet?.name
             }
-            
-            self.watch(object: wallet, propertyNames: [#keyPath(Wallet.nativeBalance), #keyPath(Wallet.ticker.price)], coalescing: true) { [weak self] in
-                guard false == (self?.wallet?.isInvalidated ?? true) else { return }
-                self?.amountLabel.text = WalletTableCell.format(nativeBalance: self?.wallet?.nativeBalance,price: self?.wallet?.ticker?.price, currency: userPreferences.currency)
-            }
-            
+
             self.watch(object: wallet, propertyName: #keyPath(Wallet.nativeBalance)) { [weak self] in
                 if wallet.nativeBalance < 0 {
                     self?.nativeAmountLabel.text = "--"
@@ -48,6 +43,14 @@ class WalletTableCell: UITableViewCell {
                 formatter.minimumIntegerDigits = 1
                 self?.nativeAmountLabel.text = formatter.string(from: wallet.nativeBalance as NSNumber)
             }
+            
+            let walletBalanceSetter = { [weak self] in
+                guard false == (self?.wallet?.isInvalidated ?? true) else { return }
+                self?.amountLabel.text = WalletTableCell.format(nativeBalance: self?.wallet?.nativeBalance,price: self?.wallet?.ticker?.price, currency: userPreferences.currency)
+            }
+            
+            self.watch(object: wallet, propertyNames: [#keyPath(Wallet.nativeBalance), #keyPath(Wallet.ticker.price)], coalescing: true, handler: walletBalanceSetter)
+            self.watch(object: userPreferences, propertyName: #keyPath(UserPreferences.currencyType), handler: walletBalanceSetter)
         }
     }
     

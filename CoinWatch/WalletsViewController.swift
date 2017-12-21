@@ -95,7 +95,9 @@ class WalletsViewController: UITableViewController {
         guard let section = Section(rawValue: indexPath.section) else { return false }
         switch section {
             case .total: return false
-            case .wallets: return self.wallets?.count ?? 0 > 0
+            case .wallets:
+                guard let wallets = self.wallets else { return false }                
+                return wallets.count > 0 && wallets[indexPath.row].coinbaseWalletInfo == nil
         }
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30BF15DC8A498778DC66907C /* Pods_CoinWatchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95C1A1C4FF5B5973E2161AD /* Pods_CoinWatchTests.framework */; };
+		3B3AB4411FE0A447001D746D /* CoinbaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3AB4401FE0A447001D746D /* CoinbaseManager.swift */; };
 		3B5E357C1FE0419D00E19C11 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5E357B1FE0419D00E19C11 /* SettingsViewController.swift */; };
 		3B5E357E1FE041E700E19C11 /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5E357D1FE041E700E19C11 /* CurrencyTableViewCell.swift */; };
 		3B5E35801FE04A7A00E19C11 /* SelectCurrencyTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5E357F1FE04A7A00E19C11 /* SelectCurrencyTableCell.swift */; };
@@ -15,6 +16,9 @@
 		3B693AAC1F54F64700FB5A4F /* CoinTickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B693AAB1F54F64700FB5A4F /* CoinTickerManager.swift */; };
 		3B693AAE1F54F85700FB5A4F /* NetworkIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B693AAD1F54F85700FB5A4F /* NetworkIndicatorManager.swift */; };
 		3B693AB11F551A3300FB5A4F /* BitcoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B693AB01F551A3300FB5A4F /* BitcoinManager.swift */; };
+		3B92BA601FE092ED007980A1 /* CoinbaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B92BA5F1FE092ED007980A1 /* CoinbaseAccount.swift */; };
+		3B92BA621FE0970C007980A1 /* CoinbaseWalletInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B92BA611FE0970C007980A1 /* CoinbaseWalletInfo.swift */; };
+		3B92BA641FE09999007980A1 /* CoinbaseAccountTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B92BA631FE09999007980A1 /* CoinbaseAccountTableCell.swift */; };
 		3BA895E51F50F20A00E52D76 /* CurrentCurrencyTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895E41F50F20A00E52D76 /* CurrentCurrencyTableCell.swift */; };
 		3BA895EB1F521A5500E52D76 /* AddressEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA895EA1F521A5500E52D76 /* AddressEntryViewController.swift */; };
 		3BA895EF1F52222E00E52D76 /* AddressEntry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BA895EE1F52222E00E52D76 /* AddressEntry.storyboard */; };
@@ -54,6 +58,8 @@
 		3BC5ECA21F5CD60C00D6AB4A /* EtheriumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5ECA11F5CD60C00D6AB4A /* EtheriumManager.swift */; };
 		3BC5ECA41F5CD6C800D6AB4A /* CoinWatcherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5ECA31F5CD6C800D6AB4A /* CoinWatcherError.swift */; };
 		3BC5ECA61F5E295800D6AB4A /* DashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC5ECA51F5E295800D6AB4A /* DashManager.swift */; };
+		3BF177781FEC389400256E7D /* Results+toArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF177771FEC389400256E7D /* Results+toArray.swift */; };
+		3BF1777A1FEC461100256E7D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF177791FEC461100256E7D /* Notifications.swift */; };
 		3BF7195B1F57D77000F0DB48 /* CoinTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF7195A1F57D77000F0DB48 /* CoinTransaction.swift */; };
 		3BF7195E1F57E16C00F0DB48 /* Transactions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BF7195D1F57E16C00F0DB48 /* Transactions.storyboard */; };
 		3BF719611F57E68800F0DB48 /* CoinTransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF719601F57E68800F0DB48 /* CoinTransactionCell.swift */; };
@@ -73,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		1F20E4463BC389657E968D32 /* Pods-CoinWatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinWatchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoinWatchTests/Pods-CoinWatchTests.release.xcconfig"; sourceTree = "<group>"; };
+		3B3AB4401FE0A447001D746D /* CoinbaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseManager.swift; sourceTree = "<group>"; };
 		3B5E357B1FE0419D00E19C11 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3B5E357D1FE041E700E19C11 /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		3B5E357F1FE04A7A00E19C11 /* SelectCurrencyTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyTableCell.swift; sourceTree = "<group>"; };
@@ -80,6 +87,9 @@
 		3B693AAB1F54F64700FB5A4F /* CoinTickerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTickerManager.swift; sourceTree = "<group>"; };
 		3B693AAD1F54F85700FB5A4F /* NetworkIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkIndicatorManager.swift; sourceTree = "<group>"; };
 		3B693AB01F551A3300FB5A4F /* BitcoinManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitcoinManager.swift; sourceTree = "<group>"; };
+		3B92BA5F1FE092ED007980A1 /* CoinbaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAccount.swift; sourceTree = "<group>"; };
+		3B92BA611FE0970C007980A1 /* CoinbaseWalletInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseWalletInfo.swift; sourceTree = "<group>"; };
+		3B92BA631FE09999007980A1 /* CoinbaseAccountTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseAccountTableCell.swift; sourceTree = "<group>"; };
 		3BA895E41F50F20A00E52D76 /* CurrentCurrencyTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentCurrencyTableCell.swift; sourceTree = "<group>"; };
 		3BA895EA1F521A5500E52D76 /* AddressEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressEntryViewController.swift; sourceTree = "<group>"; };
 		3BA895EE1F52222E00E52D76 /* AddressEntry.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddressEntry.storyboard; sourceTree = "<group>"; };
@@ -124,6 +134,8 @@
 		3BC5ECA11F5CD60C00D6AB4A /* EtheriumManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EtheriumManager.swift; sourceTree = "<group>"; };
 		3BC5ECA31F5CD6C800D6AB4A /* CoinWatcherError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinWatcherError.swift; sourceTree = "<group>"; };
 		3BC5ECA51F5E295800D6AB4A /* DashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashManager.swift; sourceTree = "<group>"; };
+		3BF177771FEC389400256E7D /* Results+toArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Results+toArray.swift"; sourceTree = "<group>"; };
+		3BF177791FEC461100256E7D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		3BF7195A1F57D77000F0DB48 /* CoinTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTransaction.swift; sourceTree = "<group>"; };
 		3BF7195D1F57E16C00F0DB48 /* Transactions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Transactions.storyboard; sourceTree = "<group>"; };
 		3BF719601F57E68800F0DB48 /* CoinTransactionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinTransactionCell.swift; sourceTree = "<group>"; };
@@ -263,6 +275,8 @@
 				3BA9B3701F4F4D2600B63364 /* Currency.swift */,
 				3BA9B3721F4F4D7300B63364 /* CoinType.swift */,
 				3BF7195A1F57D77000F0DB48 /* CoinTransaction.swift */,
+				3B92BA5F1FE092ED007980A1 /* CoinbaseAccount.swift */,
+				3B92BA611FE0970C007980A1 /* CoinbaseWalletInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -288,6 +302,7 @@
 				3BA896011F53905000E52D76 /* WalletTotalTableCell.swift */,
 				3B5E357D1FE041E700E19C11 /* CurrencyTableViewCell.swift */,
 				3B5E357F1FE04A7A00E19C11 /* SelectCurrencyTableCell.swift */,
+				3B92BA631FE09999007980A1 /* CoinbaseAccountTableCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -307,6 +322,8 @@
 				3BA9B35D1F4D4B7A00B63364 /* UIViewController+DefaultActions.swift */,
 				3BA9B3631F4E64F300B63364 /* NSObject+KVO.swift */,
 				3BC5EC991F5CC6E700D6AB4A /* UIView+Extra.swift */,
+				3BF177771FEC389400256E7D /* Results+toArray.swift */,
+				3BF177791FEC461100256E7D /* Notifications.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -323,6 +340,7 @@
 				3BC5ECA51F5E295800D6AB4A /* DashManager.swift */,
 				3BABEB1C1FBCC17D00E09B9E /* BitcoinCashManager.swift */,
 				3BABEB1E1FBE0C1A00E09B9E /* LitecoinManager.swift */,
+				3B3AB4401FE0A447001D746D /* CoinbaseManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -521,9 +539,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CoinWatch/Pods-CoinWatch-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SVPullToRefresh/SVPullToRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/coinbase-official/coinbase_official.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVPullToRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/coinbase_official.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -536,13 +565,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoinWatch-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C48B9D1FD03AD5600F87AE8E /* [CP] Copy Pods Resources */ = {
@@ -551,9 +583,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CoinWatch/Pods-CoinWatch-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -581,13 +616,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoinWatchTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -607,6 +645,7 @@
 				3BABEB1F1FBE0C1A00E09B9E /* LitecoinManager.swift in Sources */,
 				3BA9B3621F4E62F200B63364 /* WalletNameViewController.swift in Sources */,
 				3BF7195B1F57D77000F0DB48 /* CoinTransaction.swift in Sources */,
+				3B92BA601FE092ED007980A1 /* CoinbaseAccount.swift in Sources */,
 				3BA9B3711F4F4D2600B63364 /* Currency.swift in Sources */,
 				3BA895F91F5226F700E52D76 /* AddWalletViewController.swift in Sources */,
 				3BA9B3731F4F4D7300B63364 /* CoinType.swift in Sources */,
@@ -617,11 +656,14 @@
 				3BA9B3591F4D49CF00B63364 /* CoinTypeTableCell.swift in Sources */,
 				3BA9B3601F4D4FC500B63364 /* ScanQRViewController.swift in Sources */,
 				3BA9B3401F4D332E00B63364 /* Wallet.swift in Sources */,
+				3BF177781FEC389400256E7D /* Results+toArray.swift in Sources */,
 				3BA9B36D1F4F4B8500B63364 /* CoinTicker.swift in Sources */,
 				3BC5ECA61F5E295800D6AB4A /* DashManager.swift in Sources */,
+				3B92BA641FE09999007980A1 /* CoinbaseAccountTableCell.swift in Sources */,
 				3BABEB1D1FBCC17D00E09B9E /* BitcoinCashManager.swift in Sources */,
 				3BA9B35E1F4D4B7A00B63364 /* UIViewController+DefaultActions.swift in Sources */,
 				3BA9B3511F4D416200B63364 /* UITableView+CoinWatch.swift in Sources */,
+				3B3AB4411FE0A447001D746D /* CoinbaseManager.swift in Sources */,
 				3BA895F71F5223A300E52D76 /* SingleFieldEntryViewController.swift in Sources */,
 				3BF719611F57E68800F0DB48 /* CoinTransactionCell.swift in Sources */,
 				3BA9B31F1F4D319C00B63364 /* ViewController.swift in Sources */,
@@ -632,8 +674,10 @@
 				3BC5EC9A1F5CC6E700D6AB4A /* UIView+Extra.swift in Sources */,
 				3B693AAE1F54F85700FB5A4F /* NetworkIndicatorManager.swift in Sources */,
 				3BC5EC9E1F5CC81F00D6AB4A /* BusyIndicatorManager.swift in Sources */,
+				3B92BA621FE0970C007980A1 /* CoinbaseWalletInfo.swift in Sources */,
 				3B693AB11F551A3300FB5A4F /* BitcoinManager.swift in Sources */,
 				3BA895EB1F521A5500E52D76 /* AddressEntryViewController.swift in Sources */,
+				3BF1777A1FEC461100256E7D /* Notifications.swift in Sources */,
 				3BC5ECA41F5CD6C800D6AB4A /* CoinWatcherError.swift in Sources */,
 				3B5E357C1FE0419D00E19C11 /* SettingsViewController.swift in Sources */,
 				3B693AAC1F54F64700FB5A4F /* CoinTickerManager.swift in Sources */,

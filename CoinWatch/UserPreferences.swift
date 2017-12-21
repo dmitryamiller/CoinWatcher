@@ -14,7 +14,7 @@ class UserPreferences: Object {
     static let DEFAULT_ID: Int = 0
     
     dynamic var id: Int = UserPreferences.DEFAULT_ID
-    dynamic var currencyType: String = Currency.usd.rawValue
+    dynamic var currencyType: String = Currency.usd.rawValue    
     
     var currency: Currency {
         get {
