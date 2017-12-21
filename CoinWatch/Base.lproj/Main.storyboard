@@ -56,21 +56,35 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WalletTableCell" rowHeight="67" id="oIU-QG-Cn3" customClass="WalletTableCell" customModule="CoinWatch" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="143.33333333333334" width="414" height="67"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WalletTableCell" rowHeight="75" id="oIU-QG-Cn3" customClass="WalletTableCell" customModule="CoinWatch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="143.33333333333334" width="414" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oIU-QG-Cn3" id="qzx-G1-xaY">
-                                    <rect key="frame" x="0.0" y="0.0" width="376" height="66.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="74.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iCa-Up-AgN">
+                                            <rect key="frame" x="25" y="14.333333333333336" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="Fwj-Cr-rDJ"/>
+                                                <constraint firstAttribute="height" constant="25" id="xQg-Yt-twk"/>
+                                            </constraints>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="?? Bitcoin Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-n9-bpu">
-                                            <rect key="frame" x="25.000000000000007" y="16" width="122.66666666666669" height="21"/>
+                                            <rect key="frame" x="55.000000000000007" y="16" width="122.66666666666669" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coinbase_account" translatesAutoresizingMaskIntoConstraints="NO" id="OQK-e0-XJV">
+                                            <rect key="frame" x="30" y="44.333333333333336" width="15" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="UI0-cf-Y62"/>
+                                                <constraint firstAttribute="width" constant="15" id="p6A-0o-gbS"/>
+                                            </constraints>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? Bitcoin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6j-y6-Lac">
-                                            <rect key="frame" x="25" y="37" width="70" height="14"/>
+                                            <rect key="frame" x="55" y="44.333333333333336" width="70" height="14.666666666666664"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                             <color key="textColor" red="0.41960784309999999" green="0.41960784309999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -82,7 +96,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?? 1.000 BTC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Umm-oQ-3pq">
-                                            <rect key="frame" x="275" y="33" width="88" height="18"/>
+                                            <rect key="frame" x="275" y="41" width="88" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                             <color key="textColor" red="0.41960784309999999" green="0.41960784309999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -90,27 +104,35 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Sg7-BA-lha" firstAttribute="top" secondItem="5pS-n9-bpu" secondAttribute="top" id="3Gz-ln-WAB"/>
-                                        <constraint firstItem="b6j-y6-Lac" firstAttribute="leading" secondItem="5pS-n9-bpu" secondAttribute="leading" id="6kp-La-N2i"/>
                                         <constraint firstItem="Umm-oQ-3pq" firstAttribute="baseline" secondItem="b6j-y6-Lac" secondAttribute="baseline" id="8aI-7u-Efa"/>
-                                        <constraint firstItem="b6j-y6-Lac" firstAttribute="top" secondItem="5pS-n9-bpu" secondAttribute="bottom" id="E1l-9t-WGv"/>
+                                        <constraint firstItem="Umm-oQ-3pq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b6j-y6-Lac" secondAttribute="trailing" constant="20" id="FhK-C1-Zsl"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="b6j-y6-Lac" secondAttribute="bottom" constant="5" id="I0B-g9-SHX"/>
-                                        <constraint firstItem="Sg7-BA-lha" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5pS-n9-bpu" secondAttribute="trailing" constant="20" id="JOX-MI-QjV"/>
+                                        <constraint firstItem="Sg7-BA-lha" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5pS-n9-bpu" secondAttribute="trailing" constant="10" id="JOX-MI-QjV"/>
+                                        <constraint firstItem="5pS-n9-bpu" firstAttribute="leading" secondItem="iCa-Up-AgN" secondAttribute="trailing" constant="5" id="Qht-Zc-79I"/>
                                         <constraint firstItem="5pS-n9-bpu" firstAttribute="top" secondItem="qzx-G1-xaY" secondAttribute="topMargin" constant="5" id="R37-0e-yFS"/>
+                                        <constraint firstItem="OQK-e0-XJV" firstAttribute="centerX" secondItem="iCa-Up-AgN" secondAttribute="centerX" id="RnT-6J-f9L"/>
                                         <constraint firstItem="Umm-oQ-3pq" firstAttribute="trailing" secondItem="Sg7-BA-lha" secondAttribute="trailing" id="XJx-XN-6Yy"/>
+                                        <constraint firstItem="b6j-y6-Lac" firstAttribute="leading" secondItem="5pS-n9-bpu" secondAttribute="leading" id="aUw-8b-Xth"/>
+                                        <constraint firstItem="b6j-y6-Lac" firstAttribute="centerY" secondItem="OQK-e0-XJV" secondAttribute="centerY" id="end-Kf-UkB"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Sg7-BA-lha" secondAttribute="trailing" constant="5" id="ftV-p2-17z"/>
-                                        <constraint firstItem="5pS-n9-bpu" firstAttribute="leading" secondItem="qzx-G1-xaY" secondAttribute="leadingMargin" constant="5" id="iJr-oI-V0U"/>
+                                        <constraint firstItem="b6j-y6-Lac" firstAttribute="top" secondItem="iCa-Up-AgN" secondAttribute="bottom" constant="5" id="gx0-pN-L0P"/>
+                                        <constraint firstItem="Umm-oQ-3pq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qzx-G1-xaY" secondAttribute="leading" constant="20" symbolic="YES" id="jam-tt-s7B"/>
+                                        <constraint firstItem="5pS-n9-bpu" firstAttribute="centerY" secondItem="iCa-Up-AgN" secondAttribute="centerY" id="qVW-JR-Qb3"/>
+                                        <constraint firstItem="iCa-Up-AgN" firstAttribute="leading" secondItem="qzx-G1-xaY" secondAttribute="leadingMargin" constant="5" id="uHc-tp-UFv"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="amountLabel" destination="Sg7-BA-lha" id="f5z-tb-EdD"/>
+                                    <outlet property="coinLogoIcon" destination="iCa-Up-AgN" id="KuD-PB-w24"/>
                                     <outlet property="coinTypeLabel" destination="b6j-y6-Lac" id="tyA-ne-moU"/>
+                                    <outlet property="coinbaseIndicatorIcon" destination="OQK-e0-XJV" id="Hod-Hd-W9T"/>
                                     <outlet property="nameLabel" destination="5pS-n9-bpu" id="jwT-o4-FFn"/>
                                     <outlet property="nativeAmountLabel" destination="Umm-oQ-3pq" id="odh-jD-AaZ"/>
                                     <segue destination="30p-11-2Xz" kind="show" id="HBT-jx-gsm"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletTotalTableCell" id="MFm-Tn-bST" customClass="WalletTotalTableCell" customModule="CoinWatch" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="210.33333333333334" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="218.33333333333334" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MFm-Tn-bST" id="KzQ-Cd-wzP">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
@@ -377,6 +399,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="coinbase_account" width="350" height="350"/>
         <image name="gear_icon" width="30" height="30"/>
     </resources>
 </document>

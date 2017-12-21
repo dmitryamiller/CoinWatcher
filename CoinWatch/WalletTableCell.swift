@@ -9,6 +9,9 @@
 import UIKit
 
 class WalletTableCell: UITableViewCell {
+    
+    @IBOutlet weak var coinLogoIcon: UIImageView!
+    @IBOutlet weak var coinbaseIndicatorIcon: UIImageView!
     @IBOutlet weak var coinTypeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
@@ -21,9 +24,12 @@ class WalletTableCell: UITableViewCell {
             guard let wallet = self.wallet else { return }
             let userPreferences = UserPreferences.current()
             
-            self.watch(object: wallet, propertyName: #keyPath(Wallet.coinTypeId)) { [weak self] in
+            self.watch(object: wallet, propertyNames: [#keyPath(Wallet.coinTypeId), #keyPath(Wallet.coinbaseWalletInfo)]) { [weak self] in
                 guard false == (self?.wallet?.isInvalidated ?? true) else { return }
-                self?.coinTypeLabel.text = self?.wallet?.coinType.rawValue
+                self?.coinTypeLabel.text = (self?.wallet?.coinType.rawValue ?? "") + (wallet.coinbaseWalletInfo != nil ? " - Coinbase" : "")
+                
+                self?.coinLogoIcon.image = self?.wallet?.coinType.logoImage
+                self?.coinbaseIndicatorIcon.isHidden = wallet.coinbaseWalletInfo == nil
             }
             
             self.watch(object: wallet, propertyName: #keyPath(Wallet.name)) { [weak self] in
