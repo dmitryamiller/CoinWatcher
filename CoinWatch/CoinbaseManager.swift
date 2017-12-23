@@ -13,7 +13,7 @@ import RealmSwift
 class CoinbaseManager: NSObject {
     static let clientId = "a053ebbbc43bf6e83368210e921d74008bd488a9d5e04e7ec18f2f2c7252df8b"
     static let secret = "f09bee69c60267e490a72d4daa725d6e14f34495b4edd031350a79f9bd7234c3"
-    static let scope  = "wallet:accounts:read,wallet:user:read,wallet:user:email" //"balance user transactions buy"
+    static let scope  = "wallet:accounts:read,wallet:user:read,wallet:user:email,wallet:transactions:read" 
     static let redirectUrlPrefix = "com.goblin77.coinbase.coinwatch-oauth"
     static let redirectUrl = "com.goblin77.coinbase.coinwatch-oauth://coinbase-oauth"
     
@@ -124,14 +124,13 @@ class CoinbaseManager: NSObject {
         }
     }
     
-    fileprivate func fetchAllTransactions(client: Coinbase) -> Promise<[CoinbaseTransaction]> {
+    fileprivate func fetchTransactions(for accountId: String, client: Coinbase) -> Promise<[CoinbaseTransaction]> {
         return Promise<[CoinbaseTransaction]> { fulfill, reject in
-            client.getTransactions({ transactions, user, _, _, _, error in
+            client.getTransactions(accountId, callback: { transactions, user, _, _, _, error in
                 if let error = error {
                     reject(CoinbaseManager.processError(error: error))
                 } else if let transactions = transactions {
-                    let transactionList = transactions.map {  $0 as! CoinbaseTransaction }
-                    fulfill(transactionList)
+                    fulfill(transactions)
                 } else {
                     reject(CoinbaseError.unknownError)
                 }
@@ -208,18 +207,34 @@ extension CoinbaseManager {
 }
 
 extension CoinbaseManager {
-    
-    
     func fetchAndSyncTransactions(for wallet: Wallet) -> Promise<Void> {
-        guard let _ = wallet.coinbaseWalletInfo,
+        guard let accountId = wallet.coinbaseWalletInfo?.accountId,
             let accessToken = wallet.coinbaseWalletInfo?.coinbaseAccount?.accessToken,
             let client = Coinbase(oAuthAccessToken: accessToken)
         else { return Promise<Void>(error: CoinbaseError.unknownError) }
         
-        return self.fetchAllTransactions(client: client).then { transactions in
-            for t in transactions {
-                print(t.amount.amount)
+        return self.fetchTransactions(for:accountId, client: client).then { transactions in
+            let realm = try! Realm()
+            
+            let existingTransactions = realm.objects(CoinTransaction.self).filter("%K = %@", #keyPath(CoinTransaction.wallet), wallet)
+            let existingTransactionHashes = Set<String>(existingTransactions.map { $0.txHash ?? "" })
+            
+            realm.beginWrite()
+            
+            for tx in transactions {
+                if existingTransactionHashes.contains(tx.transactionID) {
+                    continue
+                }
+                
+                let newTx = CoinTransaction()
+                newTx.wallet = wallet
+                newTx.nativeAmount = Double(tx.amount.amount) ?? 0
+                newTx.date = tx.creationDate
+                newTx.txHash = tx.transactionID
+                realm.add(newTx)
             }
+            
+            try? realm.commitWrite()
             return Promise<Void>()
         }
     }
