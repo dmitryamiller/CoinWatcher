@@ -13,7 +13,7 @@ import RealmSwift
 class CoinbaseManager: NSObject {
     static let clientId = "a053ebbbc43bf6e83368210e921d74008bd488a9d5e04e7ec18f2f2c7252df8b"
     static let secret = "f09bee69c60267e490a72d4daa725d6e14f34495b4edd031350a79f9bd7234c3"
-    static let scope  = "balance transactions user"
+    static let scope  = "wallet:accounts:read,wallet:user:read,wallet:user:email" //"balance user transactions buy"
     static let redirectUrlPrefix = "com.goblin77.coinbase.coinwatch-oauth"
     static let redirectUrl = "com.goblin77.coinbase.coinwatch-oauth://coinbase-oauth"
     
@@ -38,7 +38,7 @@ class CoinbaseManager: NSObject {
             } else {
                 CoinbaseOAuth.finishAuthentication(for: url, clientId: CoinbaseManager.clientId, clientSecret: CoinbaseManager.secret) { result, error in
                     if let error = error {
-                        reject(error)
+                        reject(CoinbaseManager.processError(error: error))
                     } else {
                         if let accessToken = (result as? [String : Any])?["access_token"] as? String, let expiresIn = (result as? [String : Any])?["expires_in"] as? Double {
                             let expirationDate = Date().addingTimeInterval(expiresIn)
@@ -58,7 +58,7 @@ class CoinbaseManager: NSObject {
         }
     }
     
-    private func synchAccountInfoAndWallets(client: Coinbase, accessToken: String? = nil, accessTokenExpirationDate: Date? = nil) -> Promise<Void> {
+    fileprivate func synchAccountInfoAndWallets(client: Coinbase, accessToken: String? = nil, accessTokenExpirationDate: Date? = nil) -> Promise<Void> {
         let userPromise = self.fetchAccountInfo(client: client)
         let accountsPromise = self.fetchCoinbaseAccounts(client: client)
         
@@ -95,7 +95,7 @@ class CoinbaseManager: NSObject {
         return Promise<CoinbaseUser> { fulfill, reject in
             client.getCurrentUser({ user, error in
                 if let error = error {
-                    reject(error)
+                    reject(CoinbaseManager.processError(error: error))
                 } else {
                     if let user = user {
                         fulfill(user)
@@ -107,11 +107,11 @@ class CoinbaseManager: NSObject {
         }
     }
     
-    private func fetchCoinbaseAccounts(client: Coinbase) -> Promise<[coinbase_official.CoinbaseAccount]> {
+    fileprivate func fetchCoinbaseAccounts(client: Coinbase) -> Promise<[coinbase_official.CoinbaseAccount]> {
         return Promise<[coinbase_official.CoinbaseAccount]> { fulfill, reject in
             client.getAccountsList({ accounts, _, error in
                 if let error = error {
-                    reject(error)
+                    reject(CoinbaseManager.processError(error: error))
                 } else {
                     var coinbaseAccounts = [coinbase_official.CoinbaseAccount]()
                     if let accountList = accounts {
@@ -119,6 +119,21 @@ class CoinbaseManager: NSObject {
                     }
                     
                     fulfill(coinbaseAccounts)
+                }
+            })
+        }
+    }
+    
+    fileprivate func fetchAllTransactions(client: Coinbase) -> Promise<[CoinbaseTransaction]> {
+        return Promise<[CoinbaseTransaction]> { fulfill, reject in
+            client.getTransactions({ transactions, user, _, _, _, error in
+                if let error = error {
+                    reject(CoinbaseManager.processError(error: error))
+                } else if let transactions = transactions {
+                    let transactionList = transactions.map {  $0 as! CoinbaseTransaction }
+                    fulfill(transactionList)
+                } else {
+                    reject(CoinbaseError.unknownError)
                 }
             })
         }
@@ -137,7 +152,7 @@ class CoinbaseManager: NSObject {
     
     private func synchCoinbaseWallets(with coinbaseAccounts: [coinbase_official.CoinbaseAccount], _ account: CoinbaseAccount, realm: Realm) {
         let initialWallets = realm.objects(Wallet.self).filter("%K == %@", #keyPath(Wallet.coinbaseWalletInfo.coinbaseAccount), account)
-        var currentWalletUUIDs = Set<String>()
+        var currentWallets = Set<Wallet>()
         for coinbaseAccount in coinbaseAccounts {
             guard let coinType = CoinType(rawValue: coinbaseAccount.balance.currency) else { continue } // we only include supported coins
             
@@ -157,18 +172,55 @@ class CoinbaseManager: NSObject {
             }
             
             wallet.lastBalanceSync = Date()
-            currentWalletUUIDs.insert(wallet.uuid)
+            currentWallets.insert(wallet)
         }
         
         var walletsToBeDeleted = [Wallet]()
         for wallet in initialWallets {
-            if !currentWalletUUIDs.contains(wallet.uuid) {
+            if !currentWallets.contains(wallet) {
                 walletsToBeDeleted.append(wallet)
             }
         }
         
         for deletedWallet in walletsToBeDeleted {
             Wallet.delete(wallet: deletedWallet, commit: false)
+        }
+    }
+    
+    static func processError(error: Error) -> Error {
+        if let statusCode = (error as NSError).userInfo["statusCode"] as? Int {
+            return statusCode == 401 ? CoinbaseError.notAuthenticated : error
+        } else {
+            return error
+        }
+    }
+}
+
+extension CoinbaseManager {
+    func sync(coinbaseAccount: CoinbaseAccount) -> Promise<Void> {
+        
+        guard let accessToken = coinbaseAccount.accessToken,
+              let client = Coinbase(oAuthAccessToken: accessToken)
+        else { return Promise<Void>(error: CoinbaseError.unknownError) }
+        
+        return self.synchAccountInfoAndWallets(client: client)
+    }
+}
+
+extension CoinbaseManager {
+    
+    
+    func fetchAndSyncTransactions(for wallet: Wallet) -> Promise<Void> {
+        guard let _ = wallet.coinbaseWalletInfo,
+            let accessToken = wallet.coinbaseWalletInfo?.coinbaseAccount?.accessToken,
+            let client = Coinbase(oAuthAccessToken: accessToken)
+        else { return Promise<Void>(error: CoinbaseError.unknownError) }
+        
+        return self.fetchAllTransactions(client: client).then { transactions in
+            for t in transactions {
+                print(t.amount.amount)
+            }
+            return Promise<Void>()
         }
     }
 }

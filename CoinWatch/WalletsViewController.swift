@@ -166,28 +166,43 @@ class WalletsViewController: UITableViewController {
     
     private func fetchWalletBalances() -> Promise<Void> {
         let realm = try! Realm()
-        var coinTypePromises = [Promise<Void>]()
+        var updatePromises = [Promise<Void>]()
         let timeUpdateAvailable = Date().addingTimeInterval(-WalletsViewController.timeWalletBalanceValid)
         
-        for coinType in Set(realm.objects(Wallet.self)
-                .filter("%K <= %@", #keyPath(Wallet.lastBalanceSync), timeUpdateAvailable)
-                .map { $0.coinType }) {
-                    switch coinType {
-                        case .bitcoin:                        
-                            coinTypePromises.append(BitcoinManager.instance.updateWalletBalances())
-                        case .bitcoinCash:
-                            coinTypePromises.append(BitcoinCashManager.instance.updateWalletBalances())
-                        case .etherium:
-                            coinTypePromises.append(EtheriumManager.instance.updateWalletBalances())
-                        case .dash:
-                            coinTypePromises.append(DashManager.instance.updateWalletBalances())
-                        case .litecoin:
-                            coinTypePromises.append(LitecoinManager.instance.updateWalletBalances())
-                    }
+        var coinbaseAccountsToUpdate = Set<CoinbaseAccount>()
+        let walletsToUpdate = realm.objects(Wallet.self)
+                                           .filter("%K <= %@", #keyPath(Wallet.lastBalanceSync), timeUpdateAvailable)
+        
+        var regularWalletCoinTypes = Set<CoinType>()
+        for wallet in walletsToUpdate {
+            if let coinbaseAccount = wallet.coinbaseWalletInfo?.coinbaseAccount {
+                coinbaseAccountsToUpdate.insert(coinbaseAccount)
+            } else {
+                regularWalletCoinTypes.insert(wallet.coinType)
+            }
         }
         
-        print("updating for \(coinTypePromises.count) coin types")
-        return when(fulfilled: coinTypePromises)
+        for coinType in regularWalletCoinTypes {
+            switch coinType {
+                case .bitcoin:
+                    updatePromises.append(BitcoinManager.instance.updateWalletBalances())
+                case .bitcoinCash:
+                    updatePromises.append(BitcoinCashManager.instance.updateWalletBalances())
+                case .etherium:
+                    updatePromises.append(EtheriumManager.instance.updateWalletBalances())
+                case .dash:
+                    updatePromises.append(DashManager.instance.updateWalletBalances())
+                case .litecoin:
+                    updatePromises.append(LitecoinManager.instance.updateWalletBalances())
+            }
+        }
+        
+        for coinbaseAccount in coinbaseAccountsToUpdate {
+            updatePromises.append(CoinbaseManager.instance.sync(coinbaseAccount: coinbaseAccount))
+        }
+        
+        
+        return when(fulfilled: updatePromises)
     }
     
     private func computeTotal() {

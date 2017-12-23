@@ -44,6 +44,10 @@ class CoinTransactionsViewController: UITableViewController {
                 wallet.lastTxSync = Date()
                 try? realm.commitWrite()
                 return AnyPromise(Promise<Void>())
+            }.catch { error in
+                if let coinbaseError = error as? CoinbaseManager.CoinbaseError {
+                    self?.handleCoinbaseError(coinbaseError)
+                }
             }.always {
                 self?.tableView.pullToRefreshView.stopAnimating()
             }
@@ -98,7 +102,10 @@ class CoinTransactionsViewController: UITableViewController {
               let coinType = self.wallet?.coinType
         else { return Promise<Void>(error: CoinWatcherError.unknown) }
         
-        switch coinType {
+        if let _ = wallet.coinbaseWalletInfo {
+            return CoinbaseManager.instance.fetchAndSyncTransactions(for: wallet)
+        } else {
+            switch coinType {
             case .bitcoin:
                 return BitcoinManager.instance.fetchTransactions(for: wallet.address)
             case .bitcoinCash:
@@ -109,6 +116,21 @@ class CoinTransactionsViewController: UITableViewController {
                 return DashManager.instance.fetchTransactions(for: wallet.address)
             case .litecoin:
                 return LitecoinManager.instance.fetchTransactions(for: wallet.address)
+            }
+        }
+    }
+    
+    private func handleCoinbaseError(_ coinbaseError: CoinbaseManager.CoinbaseError) {
+        switch coinbaseError {
+            case .invalidUrl: return
+            case .unknownError: return
+            case .notAuthenticated:
+                let alert = UIAlertController(title: "Authentication Required", message: "You need to login to Coinbase to refresh your data. Proceed?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                    CoinbaseManager.instance.startAuthentication()
+                }))
+                self.present(alert, animated: true, completion: nil)
         }
     }
 }
