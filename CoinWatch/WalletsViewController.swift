@@ -41,19 +41,7 @@ class WalletsViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let selectCurrencyViewController = segue.destination as? SelectCurrencyViewController {
-            selectCurrencyViewController.selectedCurrency = UserPreferences.current().currency
-            selectCurrencyViewController.didSelectCurrency = { [weak self] currency in
-                let realm  = try! Realm()
-                realm.beginWrite()
-                let userPrefererences = UserPreferences.current()
-                if userPrefererences.currency != currency {
-                    userPrefererences.currencyType = currency.rawValue
-                }
-                try! realm.commitWrite()
-                self?.navigationController?.popViewController(animated: true)
-            }
-        } else if let transactionsViewController = segue.destination as? CoinTransactionsViewController {
+        if let transactionsViewController = segue.destination as? CoinTransactionsViewController {
             transactionsViewController.wallet = (sender as? WalletTableCell)?.wallet
         }
     }
