@@ -11,7 +11,6 @@ import UIKit
 class WalletTableCell: UITableViewCell {
     
     @IBOutlet weak var coinLogoIcon: UIImageView!
-    @IBOutlet weak var coinbaseIndicatorIcon: UIImageView!
     @IBOutlet weak var coinTypeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
@@ -29,7 +28,6 @@ class WalletTableCell: UITableViewCell {
                 self?.coinTypeLabel.text = (self?.wallet?.coinType.rawValue ?? "") + (wallet.coinbaseWalletInfo != nil ? " - Coinbase" : "")
                 
                 self?.coinLogoIcon.image = self?.wallet?.coinType.logoImage
-                self?.coinbaseIndicatorIcon.isHidden = wallet.coinbaseWalletInfo == nil
             }
             
             self.watch(object: wallet, propertyName: #keyPath(Wallet.name)) { [weak self] in

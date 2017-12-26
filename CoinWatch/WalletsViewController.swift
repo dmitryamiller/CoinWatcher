@@ -13,9 +13,12 @@ import SVPullToRefresh
 
 class WalletsViewController: UITableViewController {
     private static let timeWalletBalanceValid: TimeInterval = 10
-    private var wallets: Results<Wallet>? 
+    private var wallets: Results<Wallet>?
+    private var coinbaseWallets: Results<Wallet>?
     
     private var walletsToken: NotificationToken?
+    private var coinbaseWalletsToken: NotificationToken?
+    
     private let totalModel = WalletTotalTableCell.Model()
     
     deinit {
@@ -28,6 +31,7 @@ class WalletsViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         self.loadAndObserveWallets()
+        self.loadAndObserveCoinbaseWallets()
         
         self.tableView.addPullToRefresh { [weak self] in
             self?.fetchWalletBalances().always {
@@ -56,7 +60,7 @@ class WalletsViewController: UITableViewController {
     
     // MARK: - TableViewDataSource and TableViewDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,6 +69,7 @@ class WalletsViewController: UITableViewController {
         switch tableSection {
             case .total: return 1
             case .wallets: return max(self.wallets?.count ?? 0, 1)
+            case .coinbaseWallets: return max(self.coinbaseWallets?.count ?? 0, 1)
         }
     }
     
@@ -88,16 +93,27 @@ class WalletsViewController: UITableViewController {
                         cell.textLabel?.text = NSLocalizedString("You have no wallets", comment: "No wallets")
                         return cell
                     }
+            case .coinbaseWallets:
+                if self.coinbaseWallets?.count ?? 0 > 0 {
+                    guard let wallets = self.coinbaseWallets else { fatalError() }
+                    let cell = tableView.dequeReusableCell(withType: CoinbaseWalletTableCell.self)
+                    cell.wallet = wallets[indexPath.row]
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "ZeroData")!
+                    cell.textLabel?.text = NSLocalizedString("You have no coinbase wallets", comment: "No coinbase wallets")
+                    return cell
+                }
         }
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         guard let section = Section(rawValue: indexPath.section) else { return false }
         switch section {
-            case .total: return false
+            case .total, .coinbaseWallets: return false
             case .wallets:
                 guard let wallets = self.wallets else { return false }                
-                return wallets.count > 0 && wallets[indexPath.row].coinbaseWalletInfo == nil
+                return wallets.count > 0
         }
     }
     
@@ -105,7 +121,7 @@ class WalletsViewController: UITableViewController {
         guard let section = Section(rawValue: indexPath.section) else { return  }
         
         switch section {
-            case .total: return
+            case .total, .coinbaseWallets: return
             case .wallets:
                 guard let wallets = self.wallets else { return }
                 switch editingStyle {
@@ -125,6 +141,8 @@ class WalletsViewController: UITableViewController {
                 return "Total"
             case .wallets:
                 return "Wallets"
+            case .coinbaseWallets:
+                return "Coinbase Wallets"
         }
     }
     
@@ -140,13 +158,12 @@ class WalletsViewController: UITableViewController {
         sections.insert(Section.wallets.rawValue)
         
         let realm = try! Realm()
-        self.walletsToken = realm.objects(Wallet.self).sorted(byKeyPath: #keyPath(Wallet.sortIndex), ascending: false).addNotificationBlock() { [weak self] changes in
+        self.walletsToken = realm.objects(Wallet.self).filter("%K == nil", #keyPath(Wallet.coinbaseWalletInfo)).sorted(byKeyPath: #keyPath(Wallet.sortIndex), ascending: false).addNotificationBlock() { [weak self] changes in
             switch changes {
                 case .initial(let wallets):
                     self?.wallets = wallets
                     self?.computeTotal()
                     self?.tableView.reloadSections(sections, with: .automatic)
-                    let _ = self?.fetchWalletBalances()
 
                 case .update(let wallets, let deletions, let insertions, _):
                     self?.computeTotal()
@@ -158,6 +175,36 @@ class WalletsViewController: UITableViewController {
                         self?.tableView.reloadSections(sections, with: .automatic)
                     }
                 
+                
+                case .error: break
+            }
+        }
+    }
+    
+    private func loadAndObserveCoinbaseWallets() {
+        var sections = IndexSet()
+        sections.insert(Section.total.rawValue)
+        sections.insert(Section.coinbaseWallets.rawValue)
+        
+        let realm = try! Realm()
+        self.coinbaseWalletsToken = realm.objects(Wallet.self)
+                                 .filter("%K != nil", #keyPath(Wallet.coinbaseWalletInfo.coinbaseAccount))
+                                 .sorted(byKeyPath: #keyPath(Wallet.sortIndex), ascending: false).addNotificationBlock() { [weak self] changes in
+            switch changes {
+                case .initial(let coinbaseWallets):
+                    self?.coinbaseWallets = coinbaseWallets
+                    self?.computeTotal()
+                    self?.tableView.reloadSections(sections, with: .automatic)
+                
+            case .update(let coinbaseWallets, let deletions, let insertions, _):
+                self?.computeTotal()
+                if insertions.count > 0 { // new wallet
+                    let _ = self?.fetchWalletBalances()
+                }
+                if deletions.count > 0 || insertions.count > 0 {
+                    self?.coinbaseWallets = coinbaseWallets
+                    self?.tableView.reloadSections(sections, with: .automatic)
+                }
                 
                 case .error: break
             }
@@ -206,10 +253,18 @@ class WalletsViewController: UITableViewController {
     }
     
     private func computeTotal() {
-        guard let wallets = self.wallets else { self.totalModel.amount = -1; return }
+        var allWallets = [Wallet]()
+        if let wallets = self.wallets {
+            allWallets.append(contentsOf: wallets)
+        }
+        
+        if let coinbaseWallets = self.coinbaseWallets {
+            allWallets.append(contentsOf: coinbaseWallets)
+        }
+        
         var total: Double = 0
         var validItemsExist = false
-        for w in wallets {
+        for w in allWallets {
             if w.nativeBalance < 0 {
                 continue
             }
@@ -219,6 +274,8 @@ class WalletsViewController: UITableViewController {
             validItemsExist = true
         }
         
+        
+        
         self.totalModel.amount = validItemsExist ? total : -1
     }
 }
@@ -227,5 +284,6 @@ extension WalletsViewController {
     enum Section : Int {
         case total = 0
         case wallets = 1
+        case coinbaseWallets = 2
     }
 }

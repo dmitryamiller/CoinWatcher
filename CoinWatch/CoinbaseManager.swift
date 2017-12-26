@@ -19,8 +19,25 @@ class CoinbaseManager: NSObject {
     
     static let instance = CoinbaseManager()
     
+    var timer: Timer?
+    
     override private init() {
+        super.init()
+        self.updateAccountExpirationDate()
+    }
+    
+    func updateAccountExpirationDate() {
+        let realm  = try! Realm()
+        let coinbaseAccounts = realm.objects(CoinbaseAccount.self)
         
+        realm.beginWrite()
+        for acct in coinbaseAccounts {
+//            if !acct.isAuthenticationValid() {
+//                acct.accessToken = nil
+//            }
+        }
+        
+        try? realm.commitWrite()
     }
     
     func canOpenUrl(_ url: URL) -> Bool {
@@ -208,8 +225,9 @@ extension CoinbaseManager {
 
 extension CoinbaseManager {
     func fetchAndSyncTransactions(for wallet: Wallet) -> Promise<Void> {
+        guard let accessToken = wallet.coinbaseWalletInfo?.coinbaseAccount?.accessToken else { return Promise<Void>(error: CoinbaseError.notAuthenticated) }
+        
         guard let accountId = wallet.coinbaseWalletInfo?.accountId,
-            let accessToken = wallet.coinbaseWalletInfo?.coinbaseAccount?.accessToken,
             let client = Coinbase(oAuthAccessToken: accessToken)
         else { return Promise<Void>(error: CoinbaseError.unknownError) }
         
