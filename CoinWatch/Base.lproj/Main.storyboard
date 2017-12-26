@@ -173,6 +173,7 @@
                                     <outlet property="nameLabel" destination="9M1-hH-Qfa" id="4Lv-9w-H20"/>
                                     <outlet property="nativeAmountLabel" destination="k2Y-M5-ban" id="BlU-QV-G7k"/>
                                     <outlet property="warningIcon" destination="gcJ-VU-RdQ" id="amj-kS-pvn"/>
+                                    <segue destination="30p-11-2Xz" kind="show" id="wa8-xd-MQ3"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletTotalTableCell" id="MFm-Tn-bST" customClass="WalletTotalTableCell" customModule="CoinWatch" customModuleProvider="target">
@@ -477,4 +478,7 @@
         <image name="gear_icon" width="25" height="25"/>
         <image name="warning" width="128" height="128"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="HBT-jx-gsm"/>
+    </inferredMetricsTieBreakers>
 </document>
