@@ -40,17 +40,13 @@ class WalletTableCell: UITableViewCell {
                     self?.nativeAmountLabel.text = "--"
                     return
                 }
-                let formatter = NumberFormatter()
-                formatter.positiveFormat = "#,###.000 \(wallet.coinType.rawValue)"
-                formatter.maximumFractionDigits = 3
-                formatter.minimumFractionDigits = 3
-                formatter.minimumIntegerDigits = 1
-                self?.nativeAmountLabel.text = formatter.string(from: wallet.nativeBalance as NSNumber)
+                
+                self?.nativeAmountLabel.text = FormatUtils.formatNativeAmount(wallet.nativeBalance, wallet.coinType)                
             }
             
             let walletBalanceSetter = { [weak self] in
                 guard false == (self?.wallet?.isInvalidated ?? true) else { return }
-                self?.amountLabel.text = WalletTableCell.format(nativeBalance: self?.wallet?.nativeBalance,price: self?.wallet?.ticker?.price, currency: userPreferences.currency)
+                self?.amountLabel.text = FormatUtils.formatAmount(nativeBalance: self?.wallet?.nativeBalance, price: self?.wallet?.ticker?.price, currency: userPreferences.currency)
             }
             
             self.watch(object: wallet, propertyNames: [#keyPath(Wallet.nativeBalance), #keyPath(Wallet.ticker.price)], coalescing: true, handler: walletBalanceSetter)
@@ -61,22 +57,4 @@ class WalletTableCell: UITableViewCell {
     override func prepareForReuse() {
         self.wallet = nil
     }
-    
-    private static func format(nativeBalance: Double?, price: Double?, currency: Currency) -> String? {
-        guard let balance = nativeBalance,
-              let price = price
-        else { return "--" }
-        
-        if balance < 0 {
-            return "--";
-        }
-        
-        let formatter = NumberFormatter()
-        formatter.positiveFormat = "\(currency.symbol)#,###.##"
-        formatter.minimumFractionDigits = 2
-        formatter.minimumIntegerDigits = 1
-        return formatter.string(from: balance * price as NSNumber)
-    }
-    
-    
 }

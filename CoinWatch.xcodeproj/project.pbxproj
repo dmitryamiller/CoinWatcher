@@ -11,6 +11,9 @@
 		3B3AB4411FE0A447001D746D /* CoinbaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3AB4401FE0A447001D746D /* CoinbaseManager.swift */; };
 		3B4005FC1FF2BC7C00ED7B87 /* CurrentTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4005FB1FF2BC7C00ED7B87 /* CurrentTimeManager.swift */; };
 		3B4005FE1FF2C3C900ED7B87 /* CoinbaseWalletTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4005FD1FF2C3C900ED7B87 /* CoinbaseWalletTableCell.swift */; };
+		3B4006001FF2E44200ED7B87 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4005FF1FF2E44200ED7B87 /* UIView+Shadow.swift */; };
+		3B4006021FF2E58C00ED7B87 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4006011FF2E58C00ED7B87 /* UIView+Border.swift */; };
+		3B4006041FF30EFD00ED7B87 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4006031FF30EFD00ED7B87 /* GradientView.swift */; };
 		3B5E357C1FE0419D00E19C11 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5E357B1FE0419D00E19C11 /* SettingsViewController.swift */; };
 		3B5E357E1FE041E700E19C11 /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5E357D1FE041E700E19C11 /* CurrencyTableViewCell.swift */; };
 		3B5E35801FE04A7A00E19C11 /* SelectCurrencyTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5E357F1FE04A7A00E19C11 /* SelectCurrencyTableCell.swift */; };
@@ -83,6 +86,9 @@
 		3B3AB4401FE0A447001D746D /* CoinbaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseManager.swift; sourceTree = "<group>"; };
 		3B4005FB1FF2BC7C00ED7B87 /* CurrentTimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTimeManager.swift; sourceTree = "<group>"; };
 		3B4005FD1FF2C3C900ED7B87 /* CoinbaseWalletTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinbaseWalletTableCell.swift; sourceTree = "<group>"; };
+		3B4005FF1FF2E44200ED7B87 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		3B4006011FF2E58C00ED7B87 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
+		3B4006031FF30EFD00ED7B87 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		3B5E357B1FE0419D00E19C11 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3B5E357D1FE041E700E19C11 /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		3B5E357F1FE04A7A00E19C11 /* SelectCurrencyTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyTableCell.swift; sourceTree = "<group>"; };
@@ -326,6 +332,8 @@
 				3BC5EC991F5CC6E700D6AB4A /* UIView+Extra.swift */,
 				3BF177771FEC389400256E7D /* Results+toArray.swift */,
 				3BF177791FEC461100256E7D /* Notifications.swift */,
+				3B4005FF1FF2E44200ED7B87 /* UIView+Shadow.swift */,
+				3B4006011FF2E58C00ED7B87 /* UIView+Border.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -379,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				3BF719601F57E68800F0DB48 /* CoinTransactionCell.swift */,
+				3B4006031FF30EFD00ED7B87 /* GradientView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -649,6 +658,7 @@
 				3BA9B3621F4E62F200B63364 /* WalletNameViewController.swift in Sources */,
 				3BF7195B1F57D77000F0DB48 /* CoinTransaction.swift in Sources */,
 				3B92BA601FE092ED007980A1 /* CoinbaseAccount.swift in Sources */,
+				3B4006021FF2E58C00ED7B87 /* UIView+Border.swift in Sources */,
 				3BA9B3711F4F4D2600B63364 /* Currency.swift in Sources */,
 				3B4005FC1FF2BC7C00ED7B87 /* CurrentTimeManager.swift in Sources */,
 				3BA895F91F5226F700E52D76 /* AddWalletViewController.swift in Sources */,
@@ -659,6 +669,7 @@
 				3BA9B3591F4D49CF00B63364 /* CoinTypeTableCell.swift in Sources */,
 				3BA9B3601F4D4FC500B63364 /* ScanQRViewController.swift in Sources */,
 				3BA9B3401F4D332E00B63364 /* Wallet.swift in Sources */,
+				3B4006041FF30EFD00ED7B87 /* GradientView.swift in Sources */,
 				3BF177781FEC389400256E7D /* Results+toArray.swift in Sources */,
 				3BA9B36D1F4F4B8500B63364 /* CoinTicker.swift in Sources */,
 				3BC5ECA61F5E295800D6AB4A /* DashManager.swift in Sources */,
@@ -678,6 +689,7 @@
 				3B693AAE1F54F85700FB5A4F /* NetworkIndicatorManager.swift in Sources */,
 				3B4005FE1FF2C3C900ED7B87 /* CoinbaseWalletTableCell.swift in Sources */,
 				3BC5EC9E1F5CC81F00D6AB4A /* BusyIndicatorManager.swift in Sources */,
+				3B4006001FF2E44200ED7B87 /* UIView+Shadow.swift in Sources */,
 				3B92BA621FE0970C007980A1 /* CoinbaseWalletInfo.swift in Sources */,
 				3B693AB11F551A3300FB5A4F /* BitcoinManager.swift in Sources */,
 				3BA895EB1F521A5500E52D76 /* AddressEntryViewController.swift in Sources */,

@@ -292,7 +292,7 @@
                 <viewControllerPlaceholder storyboardName="Transactions" id="30p-11-2Xz" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="obh-qz-vm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="341"/>
+            <point key="canvasLocation" x="1843" y="137"/>
         </scene>
         <!--Settings-->
         <scene sceneID="uL4-qN-eKi">
