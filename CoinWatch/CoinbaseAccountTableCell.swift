@@ -27,7 +27,7 @@ class CoinbaseAccountTableCell: UITableViewCell {
                     self.statusLabel.text = "Authenticated. The token will expire in \(CoinbaseAccountTableCell.formatTimeTilExpiration(for: willExpireInTimeInterval))"
                 } else {
                     self.accountExpiredImageView.isHidden = false
-                    self.statusLabel.text = "Expired. You need to login to coinbase again to get up to date information."
+                    self.statusLabel.text = "Token Expired. You need to login to coinbase again to get up to date information."
                 }
             }
             
