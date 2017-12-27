@@ -75,8 +75,7 @@ class SettingsViewController: UITableViewController {
                 }
                 
                 CoinbaseManager.instance.startAuthentication()                
-                break
-            
+                break            
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
