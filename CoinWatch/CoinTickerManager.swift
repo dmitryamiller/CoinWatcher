@@ -37,7 +37,20 @@ class CoinTickerManager: NSObject {
         let currencyType = UserPreferences.current().currencyType
         
         for wallet in realm.objects(Wallet.self) {
-            wallet.ticker = realm.object(ofType: CoinTicker.self, forPrimaryKey: CoinTicker.uuid(forCoinTypeId: wallet.coinTypeId, currencyId: currencyType))
+            let coinTicker: CoinTicker = {
+                if let existingTicker = realm.object(ofType: CoinTicker.self, forPrimaryKey: CoinTicker.uuid(forCoinTypeId: wallet.coinTypeId, currencyId: currencyType)) {
+                    return existingTicker
+                } else {
+                    let ticker = CoinTicker()
+                    ticker.uuid = CoinTicker.uuid(forCoinTypeId: wallet.coinTypeId, currencyId: currencyType)
+                    ticker.price = 0
+                    realm.add(ticker)
+                    
+                    return ticker
+                }
+            }()
+            
+            wallet.ticker = coinTicker
         }
         try? realm.commitWrite()
     }
@@ -127,13 +140,14 @@ extension CoinTickerManager {
             
             guard let coinType = CoinType(rawValue: symbol) else { continue }
             
-            let ticker = realm.object(ofType: CoinTicker.self, forPrimaryKey: CoinTicker.uuid(forCoinTypeId: coinType.rawValue, currencyId: userPreferences.currency.rawValue))
+            let tickerUUID = CoinTicker.uuid(forCoinTypeId: coinType.rawValue, currencyId: userPreferences.currency.rawValue)
+            let ticker = realm.object(ofType: CoinTicker.self, forPrimaryKey: tickerUUID)
             if ticker == nil {
                 let ticker = CoinTicker()
                 ticker.coinTypeId = coinType.rawValue
                 ticker.currencyId = userPreferences.currency.rawValue
                 ticker.price = Double(priceInCurrentCurrencyStr) ?? 0
-                ticker.uuid = CoinTicker.uuid(forCoinTypeId: ticker.coinTypeId, currencyId: ticker.currencyId)
+                ticker.uuid = tickerUUID
                 realm.add(ticker)
             } else {
                 ticker?.price = Double(priceInCurrentCurrencyStr) ?? 0

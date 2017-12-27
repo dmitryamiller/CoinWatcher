@@ -14,6 +14,8 @@ class CoinTransactionCell: UITableViewCell {
     @IBOutlet weak var nativeAmountLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
+    static let positiveAmountColor = UIColor(red: CGFloat(12.0/255.0), green: CGFloat(101.0/255.0), blue: CGFloat(204.0/255.0), alpha: 1.0)
+    
     var tx: CoinTransaction? {
         didSet {
             let dateFormatter = DateFormatter()
@@ -29,6 +31,7 @@ class CoinTransactionCell: UITableViewCell {
             self.unwatchAll()
             
             guard let tx = self.tx else { return }
+            
             self.watch(object: tx, propertyName: #keyPath(CoinTransaction.wallet.ticker.price)) { [weak self] in
                 guard false == tx.isInvalidated else { return }
                 self?.nativeAmountLabel.text = CoinTransactionCell.format(nativeBalance: tx.nativeAmount, coinType: tx.wallet?.coinType)
@@ -38,7 +41,7 @@ class CoinTransactionCell: UITableViewCell {
                     self?.amountLabel.text = "--"
                 }
                 
-                self?.amountLabel.textColor = tx.nativeAmount >= 0 ? UIColor.blue : UIColor.red
+                self?.amountLabel.textColor = tx.nativeAmount >= 0 ? CoinTransactionCell.positiveAmountColor : UIColor.red
             }
         }
     }

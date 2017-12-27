@@ -27,6 +27,16 @@ enum CoinType: String {
         }
     }
     
+    var logoImage: UIImage {
+        switch self {
+            case .bitcoin: return #imageLiteral(resourceName: "bitcoin")
+            case .bitcoinCash: return #imageLiteral(resourceName: "bitcoin_cash")
+            case .dash: return #imageLiteral(resourceName: "dash")
+            case .etherium: return #imageLiteral(resourceName: "etherium")
+            case .litecoin: return #imageLiteral(resourceName: "litecoin")
+        }
+    }
+    
     var addressScheme: String {
         get {
             switch self {

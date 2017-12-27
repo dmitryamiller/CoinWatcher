@@ -13,9 +13,12 @@ import SVPullToRefresh
 
 class WalletsViewController: UITableViewController {
     private static let timeWalletBalanceValid: TimeInterval = 10
-    private var wallets: Results<Wallet>? 
+    private var wallets: Results<Wallet>?
+    private var coinbaseWallets: Results<Wallet>?
     
     private var walletsToken: NotificationToken?
+    private var coinbaseWalletsToken: NotificationToken?
+    
     private let totalModel = WalletTotalTableCell.Model()
     
     deinit {
@@ -28,6 +31,7 @@ class WalletsViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         self.loadAndObserveWallets()
+        self.loadAndObserveCoinbaseWallets()
         
         self.tableView.addPullToRefresh { [weak self] in
             self?.fetchWalletBalances().always {
@@ -37,26 +41,14 @@ class WalletsViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let selectCurrencyViewController = segue.destination as? SelectCurrencyViewController {
-            selectCurrencyViewController.selectedCurrency = UserPreferences.current().currency
-            selectCurrencyViewController.didSelectCurrency = { [weak self] currency in
-                let realm  = try! Realm()
-                realm.beginWrite()
-                let userPrefererences = UserPreferences.current()
-                if userPrefererences.currency != currency {
-                    userPrefererences.currencyType = currency.rawValue
-                }
-                try! realm.commitWrite()
-                self?.navigationController?.popViewController(animated: true)
-            }
-        } else if let transactionsViewController = segue.destination as? CoinTransactionsViewController {
+        if let transactionsViewController = segue.destination as? CoinTransactionsViewController {
             transactionsViewController.wallet = (sender as? WalletTableCell)?.wallet
         }
     }
     
     // MARK: - TableViewDataSource and TableViewDelegate
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,6 +57,7 @@ class WalletsViewController: UITableViewController {
         switch tableSection {
             case .total: return 1
             case .wallets: return max(self.wallets?.count ?? 0, 1)
+            case .coinbaseWallets: return max(self.coinbaseWallets?.count ?? 0, 1)
         }
     }
     
@@ -88,14 +81,27 @@ class WalletsViewController: UITableViewController {
                         cell.textLabel?.text = NSLocalizedString("You have no wallets", comment: "No wallets")
                         return cell
                     }
+            case .coinbaseWallets:
+                if self.coinbaseWallets?.count ?? 0 > 0 {
+                    guard let wallets = self.coinbaseWallets else { fatalError() }
+                    let cell = tableView.dequeReusableCell(withType: CoinbaseWalletTableCell.self)
+                    cell.wallet = wallets[indexPath.row]
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "ZeroData")!
+                    cell.textLabel?.text = NSLocalizedString("You have no coinbase wallets", comment: "No coinbase wallets")
+                    return cell
+                }
         }
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         guard let section = Section(rawValue: indexPath.section) else { return false }
         switch section {
-            case .total: return false
-            case .wallets: return self.wallets?.count ?? 0 > 0
+            case .total, .coinbaseWallets: return false
+            case .wallets:
+                guard let wallets = self.wallets else { return false }                
+                return wallets.count > 0
         }
     }
     
@@ -103,7 +109,7 @@ class WalletsViewController: UITableViewController {
         guard let section = Section(rawValue: indexPath.section) else { return  }
         
         switch section {
-            case .total: return
+            case .total, .coinbaseWallets: return
             case .wallets:
                 guard let wallets = self.wallets else { return }
                 switch editingStyle {
@@ -123,6 +129,8 @@ class WalletsViewController: UITableViewController {
                 return "Total"
             case .wallets:
                 return "Wallets"
+            case .coinbaseWallets:
+                return "Coinbase Wallets"
         }
     }
     
@@ -138,13 +146,12 @@ class WalletsViewController: UITableViewController {
         sections.insert(Section.wallets.rawValue)
         
         let realm = try! Realm()
-        self.walletsToken = realm.objects(Wallet.self).sorted(byKeyPath: #keyPath(Wallet.sortIndex), ascending: false).addNotificationBlock() { [weak self] changes in
+        self.walletsToken = realm.objects(Wallet.self).filter("%K == nil", #keyPath(Wallet.coinbaseWalletInfo)).sorted(byKeyPath: #keyPath(Wallet.sortIndex), ascending: false).addNotificationBlock() { [weak self] changes in
             switch changes {
                 case .initial(let wallets):
                     self?.wallets = wallets
                     self?.computeTotal()
                     self?.tableView.reloadSections(sections, with: .automatic)
-                    let _ = self?.fetchWalletBalances()
 
                 case .update(let wallets, let deletions, let insertions, _):
                     self?.computeTotal()
@@ -162,37 +169,90 @@ class WalletsViewController: UITableViewController {
         }
     }
     
+    private func loadAndObserveCoinbaseWallets() {
+        var sections = IndexSet()
+        sections.insert(Section.total.rawValue)
+        sections.insert(Section.coinbaseWallets.rawValue)
+        
+        let realm = try! Realm()
+        self.coinbaseWalletsToken = realm.objects(Wallet.self)
+                                 .filter("%K != nil", #keyPath(Wallet.coinbaseWalletInfo.coinbaseAccount))
+                                 .sorted(byKeyPath: #keyPath(Wallet.sortIndex), ascending: false).addNotificationBlock() { [weak self] changes in
+            switch changes {
+                case .initial(let coinbaseWallets):
+                    self?.coinbaseWallets = coinbaseWallets
+                    self?.computeTotal()
+                    self?.tableView.reloadSections(sections, with: .automatic)
+                
+            case .update(let coinbaseWallets, let deletions, let insertions, _):
+                self?.computeTotal()
+                if insertions.count > 0 { // new wallet
+                    let _ = self?.fetchWalletBalances()
+                }
+                if deletions.count > 0 || insertions.count > 0 {
+                    self?.coinbaseWallets = coinbaseWallets
+                    self?.tableView.reloadSections(sections, with: .automatic)
+                }
+                
+                case .error: break
+            }
+        }
+    }
+    
     private func fetchWalletBalances() -> Promise<Void> {
         let realm = try! Realm()
-        var coinTypePromises = [Promise<Void>]()
+        var updatePromises = [Promise<Void>]()
         let timeUpdateAvailable = Date().addingTimeInterval(-WalletsViewController.timeWalletBalanceValid)
         
-        for coinType in Set(realm.objects(Wallet.self)
-                .filter("%K <= %@", #keyPath(Wallet.lastBalanceSync), timeUpdateAvailable)
-                .map { $0.coinType }) {
-                    switch coinType {
-                        case .bitcoin:                        
-                            coinTypePromises.append(BitcoinManager.instance.updateWalletBalances())
-                        case .bitcoinCash:
-                            coinTypePromises.append(BitcoinCashManager.instance.updateWalletBalances())
-                        case .etherium:
-                            coinTypePromises.append(EtheriumManager.instance.updateWalletBalances())
-                        case .dash:
-                            coinTypePromises.append(DashManager.instance.updateWalletBalances())
-                        case .litecoin:
-                            coinTypePromises.append(LitecoinManager.instance.updateWalletBalances())
-                    }
+        var coinbaseAccountsToUpdate = Set<CoinbaseAccount>()
+        let walletsToUpdate = realm.objects(Wallet.self)
+                                           .filter("%K <= %@", #keyPath(Wallet.lastBalanceSync), timeUpdateAvailable)
+        
+        var regularWalletCoinTypes = Set<CoinType>()
+        for wallet in walletsToUpdate {
+            if let coinbaseAccount = wallet.coinbaseWalletInfo?.coinbaseAccount {
+                coinbaseAccountsToUpdate.insert(coinbaseAccount)
+            } else {
+                regularWalletCoinTypes.insert(wallet.coinType)
+            }
         }
         
-        print("updating for \(coinTypePromises.count) coin types")
-        return when(fulfilled: coinTypePromises)
+        for coinType in regularWalletCoinTypes {
+            switch coinType {
+                case .bitcoin:
+                    updatePromises.append(BitcoinManager.instance.updateWalletBalances())
+                case .bitcoinCash:
+                    updatePromises.append(BitcoinCashManager.instance.updateWalletBalances())
+                case .etherium:
+                    updatePromises.append(EtheriumManager.instance.updateWalletBalances())
+                case .dash:
+                    updatePromises.append(DashManager.instance.updateWalletBalances())
+                case .litecoin:
+                    updatePromises.append(LitecoinManager.instance.updateWalletBalances())
+            }
+        }
+        
+        for coinbaseAccount in coinbaseAccountsToUpdate {
+            updatePromises.append(CoinbaseManager.instance.sync(coinbaseAccount: coinbaseAccount))
+        }
+        
+        
+        return when(fulfilled: updatePromises)
     }
     
     private func computeTotal() {
-        guard let wallets = self.wallets else { self.totalModel.amount = -1; return }
+        var allWallets = [Wallet]()
+        if let wallets = self.wallets {
+            allWallets.append(contentsOf: wallets)
+        }
+        
+        if let coinbaseWallets = self.coinbaseWallets {
+            allWallets.append(contentsOf: coinbaseWallets)
+        }
+        
         var total: Double = 0
         var validItemsExist = false
-        for w in wallets {
+        for w in allWallets {
             if w.nativeBalance < 0 {
                 continue
             }
@@ -202,6 +262,8 @@ class WalletsViewController: UITableViewController {
             validItemsExist = true
         }
         
+        
+        
         self.totalModel.amount = validItemsExist ? total : -1
     }
 }
@@ -210,5 +272,6 @@ extension WalletsViewController {
     enum Section : Int {
         case total = 0
         case wallets = 1
+        case coinbaseWallets = 2
     }
 }
